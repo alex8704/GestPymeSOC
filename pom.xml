@@ -6,7 +6,7 @@
 	<packaging>pom</packaging>
 	<name>GestPymeSOCParent</name>
 	<properties>
-		<vaadin.version>7.5.8</vaadin.version>
+		<vaadin.version>7.6.0</vaadin.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<project.source.version>1.7</project.source.version>
 		<project.target.version>1.7</project.target.version>
@@ -17,9 +17,9 @@
 		<javamail.version>1.4.7</javamail.version>
 		<javaee.version>6.0</javaee.version>
 		<reflections.version>0.9.10</reflections.version>
-		<application.widgetset>co.com.binariasystems.project.BaseProjectWidgetset</application.widgetset>
-		<application.basepackage>co/com/binariasystems/project</application.basepackage>
-		<webModule.themename>main</webModule.themename>
+		<application.widgetset>co.com.binariasystems.gestpymesoc.web.gwt.widgetset.GestPymeSOCWidgetset</application.widgetset>
+		<application.basepackage>co/com/binariasystems/gestpymesoc</application.basepackage>
+		<webModule.themename>binaria</webModule.themename>
 		<webModule.name>GestPymeSOCWeb</webModule.name>
 		<widgetsetModule.name>GestPymeSOCWidgetset</widgetsetModule.name>
 	</properties>
