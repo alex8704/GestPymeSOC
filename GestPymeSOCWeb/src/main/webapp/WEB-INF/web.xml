@@ -1,12 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <display-name>GestPymeSOWeb</display-name>
+  <context-param>
+    <description>Archivo de Configurcacion de Spring Framework</description>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/config/spring/application-context.xml</param-value>
+  </context-param>
+  <context-param>
+    <description>Clase de Inicializacion del Enterno Shiro</description>
+    <param-name>shiroEnvironmentClass</param-name>
+    <param-value>co.com.binariasystems.fmw.vweb.util.shiro.ShiroIniWebEnvironment</param-value>
+  </context-param>
+  <context-param>
+    <description>Ubicacion Archivo de Configuracion de Shiro</description>
+    <param-name>shiroConfigLocations</param-name>
+    <param-value>/WEB-INF/config/shiro/shiro.ini</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>co.com.binariasystems.gestpymesoc.web.servlet.GestPymeSOCContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>shiro-security-filter</filter-name>
+    <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+    <async-supported>true</async-supported>
+    <init-param>
+      <param-name>staticSecurityManagerEnabled</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <servlet>
+    <display-name>GestPymeSOC-VServlet</display-name>
+    <servlet-name>GestPymeSOC-VServlet</servlet-name>
+    <servlet-class>co.com.binariasystems.gestpymesoc.web.servlet.GestPymeSOCVaadinServlet</servlet-class>
+    <init-param>
+      <param-name>UI</param-name>
+      <param-value>co.com.binariasystems.gestpymesoc.web.GestPymeSOC</param-value>
+    </init-param>
+    <init-param>
+      <description>Application widgetset</description>
+      <param-name>widgetset</param-name>
+      <param-value>co.com.binariasystems.gestpymesoc.web.gwt.widgetset.GestPymeSOCWidgetset</param-value>
+    </init-param>
+    <init-param>
+      <description>Indica si se desea desabilitar el modo DEBUG</description>
+      <param-name>productionMode</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>pushmode</param-name>
+      <param-value>automatic</param-value>
+    </init-param>
+    <init-param>
+      <description>Atmosphere Interceptors Disable/Enable</description>
+      <param-name>org.atmosphere.cpr.AtmosphereInterceptor.disableDefaults</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <description>Auxiliar Atmosphere Interceptors</description>
+      <param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
+      <param-value>
+				co.com.binariasystems.fmw.vweb.util.atmosphere.SpringContextPushInterceptor,
+				org.atmosphere.interceptor.ShiroInterceptor
+			</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported>
+  </servlet>
+  <filter-mapping>
+    <filter-name>shiro-security-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet-mapping>
+    <servlet-name>GestPymeSOC-VServlet</servlet-name>
+    <url-pattern>/main/*</url-pattern>
+    <url-pattern>/VAADIN/*</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>15</session-timeout>
+  </session-config>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <listener>
+    <listener-class>co.com.binariasystems.gestpymesoc.web.servlet.GestPymeSOCContextListener</listener-class>
+  </listener>
 </web-app>

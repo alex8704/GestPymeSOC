@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="debug" strict="false" name="WebtestLogginConfig">
+<Configuration status="debug" strict="false" name="GestPymeSOCLogginConfig">
 	<Properties>
-		<Property name="filename">/opt/logs/WebtestApp/application.log</Property>
+		<Property name="filename">/opt/GestPymeSOC/logs/application.log</Property>
 	</Properties>
 
 	<Appenders>
@@ -16,7 +16,7 @@
 				Appender de Rotacion diaria de Arhcivos por Defecto (destino <ubicacion-logs>/application.log) 
 		****************************************************************************************************************** -->
 		<RollingRandomAccessFile name="DefaultRollingRandomAccessFile"
-			fileName="/opt/logs/WebtestApp/application.log" filePattern="/opt/logs/WebtestApp/application-%d{MM-dd-yyyy}.log.gz"
+			fileName="/opt/logs/WebtestApp/application.log" filePattern="/opt/GestPymeSOC/logs/application-%d{MM-dd-yyyy}.log.gz"
 			append="true">
 			<PatternLayout>
 				<Pattern>[%p] %d{yyyy/MM/dd HH:mm:ss.SSS} (%t) - %m%n</Pattern>
@@ -41,17 +41,17 @@
 				paquete base de los demas paquetes de la aplicacion co.com.binariasystems 
 		****************************************************************************************************************** -->
 		<Logger name="co.com.binariasystems" additivity="false" level="debug">
-			<AppenderRef ref="Stdout" />
+			<AppenderRef ref="AsyncStdout" />
 			<AppenderRef ref="DefaultAsyncRollingAppender" />
 		</Logger>
 	
 		<Logger name="org.apache.shiro" additivity="false" level="debug">
-			<AppenderRef ref="Stdout" />
+			<AppenderRef ref="AsyncStdout" />
 			<AppenderRef ref="DefaultAsyncRollingAppender" />
 		</Logger>
 	
 		<Logger name="org.atmosphere" additivity="false" level="debug">
-			<AppenderRef ref="Stdout" />
+			<AppenderRef ref="AsyncStdout" />
 			<AppenderRef ref="DefaultAsyncRollingAppender" />
 		</Logger>
 		
@@ -59,7 +59,7 @@
 				Categoria root (raiz), prioridad INFO, por Consola 
 		****************************************************************************************************************** -->
 		<Root level="info">
-			<AppenderRef ref="Stdout" />
+			<AppenderRef ref="AsyncStdout" />
 		</Root>
 	</Loggers>
 
