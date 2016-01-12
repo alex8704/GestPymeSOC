@@ -14,6 +14,7 @@ import co.com.binariasystems.fmw.ioc.IOCHelper;
 import co.com.binariasystems.fmw.util.db.DBUtil;
 import co.com.binariasystems.fmw.util.di.SpringIOCProvider;
 import co.com.binariasystems.fmw.vweb.constants.VWebCommonConstants;
+import co.com.binariasystems.gestpymesoc.business.bean.GestPymeSOCSystemBean;
 
 /**
  * Application Lifecycle Listener implementation class GestPymeSOCContextListener
@@ -31,7 +32,7 @@ public class GestPymeSOCContextListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-    	IOCHelper.setDefault(SpringIOCProvider.configure(WebApplicationContextUtils.getRequiredWebApplicationContext(sce.getServletContext())));
+    	IOCHelper.setProvider(SpringIOCProvider.configure(WebApplicationContextUtils.getRequiredWebApplicationContext(sce.getServletContext())));
     	DBUtil.init(IOCHelper.getBean("GestPymeSOCDS", DataSource.class));
     	Class resourceLoaderClass = IOCHelper.getBean(FMWConstants.APPLICATION_DEFAULT_CLASS_FOR_RESOURCE_LOAD_IOC_KEY, Class.class);
     	String entitiesStringsFilePath = IOCHelper.getBean(VWebCommonConstants.APP_ENTITIES_MESSAGES_FILE_IOC_KEY, String.class);
@@ -43,6 +44,12 @@ public class GestPymeSOCContextListener implements ServletContextListener {
     	LOGGER.info(FMWConstants.APPLICATION_DEFAULT_CLASS_FOR_RESOURCE_LOAD_IOC_KEY + ": " + resourceLoaderClass);
     	LOGGER.info(VWebCommonConstants.APP_ENTITIES_MESSAGES_FILE_IOC_KEY + ": " + entitiesStringsFilePath);
     	LOGGER.info(FMWEntityConstants.ENTITY_OPERATIONS_SHOWSQL_IOC_KEY + ": " + entityOperatiosShowSql);
+    	ensureDataBaseInitialization();
+    }
+    
+    private void ensureDataBaseInitialization(){
+    	GestPymeSOCSystemBean systemBean = IOCHelper.getBean(GestPymeSOCSystemBean.class);
+    	systemBean.validateDataModelCreation();
     }
 
 	/**
