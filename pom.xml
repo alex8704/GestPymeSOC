@@ -22,6 +22,7 @@
 		<webModule.themename>binaria</webModule.themename>
 		<webModule.name>GestPymeSOCWeb</webModule.name>
 		<widgetsetModule.name>GestPymeSOCWidgetset</widgetsetModule.name>
+		<deployable.name>gestpymesoc</deployable.name>
 	</properties>
 
 	<repositories>

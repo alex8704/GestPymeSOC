@@ -7,12 +7,12 @@ public class GestPymeSOCSecurityPrincipalConverter implements SecurityPrincipalC
 
 	@Override
 	public Object toPrincipalModel(String representation) throws FMWSecurityException {
-		return null;
+		return representation;
 	}
 
 	@Override
 	public String toPrincipalRepresentation(Object model) throws FMWSecurityException {
-		return null;
+		return model.toString();
 	}
 
 }

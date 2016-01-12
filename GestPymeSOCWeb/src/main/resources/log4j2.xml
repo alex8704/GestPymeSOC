@@ -16,7 +16,7 @@
 				Appender de Rotacion diaria de Arhcivos por Defecto (destino <ubicacion-logs>/application.log) 
 		****************************************************************************************************************** -->
 		<RollingRandomAccessFile name="DefaultRollingRandomAccessFile"
-			fileName="/opt/logs/WebtestApp/application.log" filePattern="/opt/GestPymeSOC/logs/application-%d{MM-dd-yyyy}.log.gz"
+			fileName="/opt/GestPymeSOC/logs/application.log" filePattern="/opt/GestPymeSOC/logs/application-%d{MM-dd-yyyy}.log.gz"
 			append="true">
 			<PatternLayout>
 				<Pattern>[%p] %d{yyyy/MM/dd HH:mm:ss.SSS} (%t) - %m%n</Pattern>

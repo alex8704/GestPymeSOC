@@ -13,13 +13,13 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client</artifactId>
 			<!-- TODO this should have scope provided once http://dev.vaadin.com/ticket/14788 is resolved -->
-			<!-- <scope>provided</scope> -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client-compiler</artifactId>
 			<!-- TODO this should have scope provided once http://dev.vaadin.com/ticket/14788 is resolved -->
-			<!-- <scope>provided</scope> -->
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
@@ -33,7 +33,10 @@
 					<webappDirectory>${basedir}/target/classes/VAADIN/widgetsets</webappDirectory>
 					<draftCompile>true</draftCompile>
 					<compileReport>false</compileReport>
-					<style>DETAILED</style>
+					<!-- Change to PRETTY (or possibly DETAILED) to get
+                    unobfuscated client side stack traces. A better approach
+                    for debugging is to use Super Dev Mode -->
+					<style>OBF</style>
 					<strict>true</strict>
 				</configuration>
 				<executions>
