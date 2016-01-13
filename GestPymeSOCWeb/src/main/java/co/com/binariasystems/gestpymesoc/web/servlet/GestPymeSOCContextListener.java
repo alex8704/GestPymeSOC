@@ -44,12 +44,20 @@ public class GestPymeSOCContextListener implements ServletContextListener {
     	LOGGER.info(FMWConstants.APPLICATION_DEFAULT_CLASS_FOR_RESOURCE_LOAD_IOC_KEY + ": " + resourceLoaderClass);
     	LOGGER.info(VWebCommonConstants.APP_ENTITIES_MESSAGES_FILE_IOC_KEY + ": " + entitiesStringsFilePath);
     	LOGGER.info(FMWEntityConstants.ENTITY_OPERATIONS_SHOWSQL_IOC_KEY + ": " + entityOperatiosShowSql);
-    	ensureDataBaseInitialization();
+    	
+    	if(isDataModelCreated()){
+    		initializeApplication();
+    	}
+    		
     }
     
-    private void ensureDataBaseInitialization(){
+    private boolean isDataModelCreated(){
     	GestPymeSOCSystemBean systemBean = IOCHelper.getBean(GestPymeSOCSystemBean.class);
-    	systemBean.validateDataModelCreation();
+    	return systemBean.validateDataModelCreation();
+    }
+    
+    private void initializeApplication(){
+    	
     }
 
 	/**

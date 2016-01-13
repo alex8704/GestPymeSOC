@@ -13,8 +13,8 @@ public class GestPymeSOCSystemBean implements FMWBusiness {
 	@Autowired
 	private GestPymeSOCSystemDAO dao;
 	
-	public void validateDataModelCreation(){
-		dao.validateDataModelCreation();
+	public boolean validateDataModelCreation(){
+		return dao.validateDataModelCreation();
 	}
 	
 }

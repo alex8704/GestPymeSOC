@@ -40,13 +40,7 @@ public class GestPymeSOCSystemDAO extends FMWAbstractDAO{
 		};
 	}
 	
-	public void validateDataModelCreation() {
-		if(!isDataModelCreated()){
-			createAndInitializeDataModel();
-		}
-	}
-	
-	private boolean isDataModelCreated(){
+	public boolean validateDataModelCreation(){
 		if(getDataSource() == null) return true;//Responde True para evitar interpretar error de conexion con NO creacionde BD
 		String sqlStmt = getString(new StringBuilder(getClass().getSimpleName()).append(".").append("validateDatabaseCreation").toString());
 		try {
@@ -57,7 +51,7 @@ public class GestPymeSOCSystemDAO extends FMWAbstractDAO{
 		}
 	}
 	
-	private void createAndInitializeDataModel(){
-		//ScriptUtils.executeSqlScript(connection, resource);
+	public boolean isSuperAdminConfigured(){
+		return true;
 	}
 }
