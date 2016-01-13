@@ -46,7 +46,7 @@
 		<!-- ******************************************* Binaria FMW Dependencies ******************************************* -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>GestPymeSOCWidgetset</artifactId>
+			<artifactId>${widgetsetModule.name}</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
@@ -58,7 +58,7 @@
 		</dependency>
 		<dependency>
 			<groupId>co.com.binariasystems</groupId>
-			<artifactId>GestPymeSOCBusiness</artifactId>
+			<artifactId>${businessModule.name}</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>

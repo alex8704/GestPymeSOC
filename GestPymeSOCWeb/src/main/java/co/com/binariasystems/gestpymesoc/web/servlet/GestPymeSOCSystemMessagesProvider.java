@@ -4,18 +4,19 @@ import org.apache.commons.lang3.StringUtils;
 
 import co.com.binariasystems.fmw.util.messagebundle.MessageBundleManager;
 import co.com.binariasystems.gestpymesoc.web.resources.resources;
+import co.com.binariasystems.gestpymesoc.web.utils.GPSWebConstants;
 
 import com.vaadin.server.CustomizedSystemMessages;
 import com.vaadin.server.SystemMessages;
 import com.vaadin.server.SystemMessagesInfo;
 import com.vaadin.server.SystemMessagesProvider;
 
-public class GestPymeSOCSystemMessagesProvider implements SystemMessagesProvider {
+public class GestPymeSOCSystemMessagesProvider implements SystemMessagesProvider, GPSWebConstants {
 	private MessageBundleManager messages;
 	
 	
 	public GestPymeSOCSystemMessagesProvider(){
-		messages = MessageBundleManager.forPath(resources.getMessageFilePath("gestpymesoc_view_messages"), false);
+		messages = MessageBundleManager.forPath(resources.getMessageFilePath(MAIN_MESSAGES_FILE), false);
 	}
 	
 	@Override

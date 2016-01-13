@@ -17,7 +17,7 @@
 	<task:annotation-driven executor="asyncTaskExecutor" exception-handler="asyncExceptionHandler"/>
 	<context:component-scan base-package="co.com.binariasystems"/>
 	
-	<bean id="asyncExceptionHandler" class="co.com.binariasystems.gestpymesoc.business.GestPymeSOCAsyncExceptionHandler"/>
+	<bean id="asyncExceptionHandler" class="${application.asynExceptionHandlerClass}"/>
 	
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -37,7 +37,7 @@
 
 	<bean id="application.default.resorceLoaderClass" class="java.lang.Class"
 		factory-method="forName">
-		<constructor-arg value="co.com.binariasystems.gestpymesoc.web.resources.resources" />
+		<constructor-arg value="${application.resourceLoaderClass}" />
 	</bean>
 
 	<jee:jndi-lookup id="GestPymeSOCDS" jndi-name="java:/jdbc/GestPymeSOC_DS" resource-ref="true"></jee:jndi-lookup>
@@ -58,9 +58,9 @@
 	
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 <!-- 		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" /> -->
-		<property name="persistenceUnitName" value="GestPymeSOC_PU" />
-		<property name="packagesToScan" value="co.com.binariasystems.gestpymesoc.business.entity"/>
-		<property name="dataSource" ref="GestPymeSOCDS" />
+		<property name="persistenceUnitName" value="${entityManagerFactory.persistenceUnitName}" />
+		<property name="packagesToScan" value="${entityManagerFactory.packagesToScan}"/>
+		<property name="dataSource" ref="${entityManagerFactory.dataSourceName}" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 		<property name="loadTimeWeaver">
 			<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>

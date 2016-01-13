@@ -13,10 +13,9 @@ import co.com.binariasystems.fmw.vweb.uicomponet.FormPanel;
 import co.com.binariasystems.fmw.vweb.uicomponet.FormValidationException;
 import co.com.binariasystems.fmw.vweb.uicomponet.MessageDialog;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.ButtonBuilder;
-import co.com.binariasystems.fmw.vweb.uicomponet.builders.OptionGroupBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.PasswordFieldBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.TextFieldBuilder;
-import co.com.binariasystems.gestpymesoc.web.dto.AuthenticationDTO;
+import co.com.binariasystems.gestpymesoc.business.dto.AuthenticationDTO;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanItem;

@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.com.binariasystems</groupId>
 	<artifactId>GestPymeSOC</artifactId>
@@ -17,11 +18,13 @@
 		<javamail.version>1.4.7</javamail.version>
 		<javaee.version>6.0</javaee.version>
 		<reflections.version>0.9.10</reflections.version>
+		<retrofit.version>2.0.0-beta3</retrofit.version>
 		<application.widgetset>co.com.binariasystems.gestpymesoc.web.gwt.widgetset.GestPymeSOCWidgetset</application.widgetset>
 		<application.basepackage>co/com/binariasystems/gestpymesoc</application.basepackage>
 		<webModule.themename>binaria</webModule.themename>
 		<webModule.name>GestPymeSOCWeb</webModule.name>
 		<widgetsetModule.name>GestPymeSOCWidgetset</widgetsetModule.name>
+		<businessModule.name>GestPymeSOCBusiness</businessModule.name>
 		<deployable.name>gestpymesoc</deployable.name>
 	</properties>
 
@@ -73,7 +76,8 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- ******************************************* Provided Dependencies START ******************************************* -->
+		<!-- ******************************************* Provided Dependencies 
+			START ******************************************* -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -91,8 +95,10 @@
 			<version>${javamail.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- ******************************************* Provided Dependencies ******************************************* END -->
-		<!-- ******************************************* Utility and Tools Dependency START ******************************************* -->
+		<!-- ******************************************* Provided Dependencies 
+			******************************************* END -->
+		<!-- ******************************************* Utility and Tools Dependency 
+			START ******************************************* -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -139,9 +145,11 @@
 			</exclusions>
 		</dependency>
 
-		<!-- ******************************************* Utility and Tools Dependency END ******************************************* -->
+		<!-- ******************************************* Utility and Tools Dependency 
+			END ******************************************* -->
 
-		<!-- ******************************************* Logging Dependency START ******************************************* -->
+		<!-- ******************************************* Logging Dependency START 
+			******************************************* -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
@@ -168,7 +176,8 @@
 			<artifactId>slf4j-api</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<!-- ******************************************* Logging Dependency END ******************************************* -->
+		<!-- ******************************************* Logging Dependency END 
+			******************************************* -->
 		<!-- ******************************************* Spring Dependencies ******************************************* -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -191,13 +200,15 @@
 			<artifactId>aspectjweaver</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<!-- ******************************************* Spring, Vaadin and Shiro Dependencies END ******************************************* -->
+		<!-- ******************************************* Spring, Vaadin and Shiro 
+			Dependencies END ******************************************* -->
+
 		<!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

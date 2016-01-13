@@ -7,7 +7,7 @@
 	******************************************************************************************************************************** -->
 	<context-param>
 		<description>Version Actual de la Aplicacion</description>
-		<param-name>gestpymesoc.applicationVersion</param-name>
+		<param-name>GestPymeSOC.applicationVersion</param-name>
 		<param-value>1.0</param-value>
 	</context-param>
 	<context-param>
@@ -24,6 +24,15 @@
 		<description>Ubicacion Archivo de Configuracion de Shiro</description>
 		<param-name>shiroConfigLocations</param-name>
 		<param-value>/WEB-INF/config/shiro/shiro.ini</param-value>
+	</context-param>
+	<context-param>
+		<description>Indica si se debe crear automaticamente el modelo de datos si no existe</description>
+		<param-name>GestPymeSOCContextListener.createDataModelIfNotExist</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>productionMode</param-name>
+		<param-value>false</param-value>
 	</context-param>
 
 	<!--********************************************************************************************************************************
@@ -62,42 +71,6 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	<servlet>
-		<display-name>GestPymeSOC-VServlet</display-name>
-		<servlet-name>GestPymeSOC-VServlet</servlet-name>
-		<servlet-class>co.com.binariasystems.gestpymesoc.web.servlet.GestPymeSOCVaadinServlet</servlet-class>
-		<init-param>
-			<param-name>UI</param-name>
-			<param-value>co.com.binariasystems.gestpymesoc.web.GestPymeSOC</param-value>
-		</init-param>
-		<init-param>
-			<description>Application widgetset</description>
-			<param-name>widgetset</param-name>
-			<param-value>co.com.binariasystems.gestpymesoc.web.gwt.widgetset.GestPymeSOCWidgetset</param-value>
-		</init-param>
-		<init-param>
-			<description>Indica si se desea desabilitar el modo DEBUG</description>
-			<param-name>productionMode</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		<init-param>
-			<param-name>pushmode</param-name>
-			<param-value>automatic</param-value>
-		</init-param>
-		<!-- <init-param>
-		<description>Atmosphere Interceptors Disable/Enable</description>
-		<param-name>org.atmosphere.cpr.AtmosphereInterceptor.disableDefaults</param-name>
-		<param-value>false</param-value>
-		</init-param> -->
-		<init-param>
-			<description>Auxiliar Atmosphere Interceptors</description>
-			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
-			<param-value>co.com.binariasystems.fmw.vweb.util.atmosphere.SpringContextPushInterceptor,
-				org.atmosphere.interceptor.ShiroInterceptor</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-		<async-supported>true</async-supported>
-	</servlet>
 
 	<!--********************************************************************************************************************************
 	Mappings de Servlets y Filtros de la Aplicacion
@@ -110,11 +83,6 @@
 		<filter-name>shiro-security-filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<servlet-mapping>
-		<servlet-name>GestPymeSOC-VServlet</servlet-name>
-		<url-pattern>/main/*</url-pattern>
-		<url-pattern>/VAADIN/*</url-pattern>
-	</servlet-mapping>
 
 	<!--********************************************************************************************************************************
 	Otros Parametros

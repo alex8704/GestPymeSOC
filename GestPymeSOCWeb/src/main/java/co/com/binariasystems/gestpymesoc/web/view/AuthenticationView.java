@@ -14,8 +14,8 @@ import co.com.binariasystems.fmw.vweb.uicomponet.builders.ButtonBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.LabelBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.PasswordFieldBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.TextFieldBuilder;
+import co.com.binariasystems.gestpymesoc.business.dto.AuthenticationDTO;
 import co.com.binariasystems.gestpymesoc.web.controller.AuthenticationViewController;
-import co.com.binariasystems.gestpymesoc.web.dto.AuthenticationDTO;
 import co.com.binariasystems.gestpymesoc.web.resources.resources;
 import co.com.binariasystems.gestpymesoc.web.utils.GPSWebConstants;
 
@@ -33,8 +33,8 @@ import com.vaadin.ui.VerticalLayout;
 @AuthenticationForm
 @Root
 @View(url="/", messages=AuthenticationView.MESSAGES_BUNDLE, controller=AuthenticationViewController.class, viewStringsByConventions= true)
-public class AuthenticationView extends AbstractView implements UIConstants{
-	public static final String		MESSAGES_BUNDLE = GPSWebConstants.MESSAGES_PACKAGE + ".gestpymesoc_view_messages";
+public class AuthenticationView extends AbstractView implements UIConstants, GPSWebConstants{
+	public static final String		MESSAGES_BUNDLE = GPSWebConstants.MESSAGES_PACKAGE + "." + MAIN_MESSAGES_FILE;
 	private VerticalLayout 				mainContainer;
 	private FormPanel					loginForm;
 	private Image						applicationLogo;
