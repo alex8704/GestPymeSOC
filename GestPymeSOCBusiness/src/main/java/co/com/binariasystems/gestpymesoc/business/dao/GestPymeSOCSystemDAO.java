@@ -23,6 +23,7 @@ import org.springframework.stereotype.Repository;
 import co.com.binariasystems.fmw.dataaccess.db.FMWAbstractDAO;
 import co.com.binariasystems.fmw.util.db.DBUtil;
 import co.com.binariasystems.gestpymesoc.business.resources.resources;
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessUtils;
 
 @Repository
 public class GestPymeSOCSystemDAO extends FMWAbstractDAO{
@@ -45,7 +46,7 @@ public class GestPymeSOCSystemDAO extends FMWAbstractDAO{
 		
 		dbValidationCallback = new RowCallbackHandler() {
 			@Override public void processRow(ResultSet rs) throws SQLException {
-				LOGGER.info("GestPymeSOC DataBase Validation Sucessfull finished. Dummy Value: '{}'", rs.getString(1));
+				LOGGER.info("{} DataBase Validation Sucessfull finished. Dummy Value: '{}'", GestPymeSOCBusinessUtils.getApplicationName(),rs.getString(1));
 			}
 		};
 	}
@@ -54,7 +55,7 @@ public class GestPymeSOCSystemDAO extends FMWAbstractDAO{
 		if(!isDataModelAlreadyCreated()){
 			if(!createIfNotExist) return false;
 			if(!runDBTablesCreationScript()) return false;
-			if(runDBConstraintsCreationScript()) return false;
+			if(!runDBConstraintsCreationScript()) return false;
 			runDBSeedInsertionScript();
 		}
 		return true;
@@ -98,8 +99,9 @@ public class GestPymeSOCSystemDAO extends FMWAbstractDAO{
 	private boolean runSingleScript(Resource scriptResource){
 		try {
 			ScriptUtils.executeSqlScript(getDataSource().getConnection(), scriptResource);
+			LOGGER.info("Sucessful script '"+scriptResource.getFilename()+"' execution");
 		} catch (ScriptException | SQLException e) {
-			LOGGER.error("Has ocurreed an unexpected error while trying run script file '"+scriptResource.getFilename()+"'.", e);
+			LOGGER.error("Has ocurred an unexpected error while trying run script file '"+scriptResource.getFilename()+"'.", e);
 			return false;
 		}
 		return true;

@@ -14,12 +14,11 @@ import co.com.binariasystems.fmw.entity.util.FMWEntityConstants;
 import co.com.binariasystems.fmw.ioc.IOCHelper;
 import co.com.binariasystems.fmw.util.db.DBUtil;
 import co.com.binariasystems.fmw.util.di.SpringIOCProvider;
-import co.com.binariasystems.fmw.util.messagebundle.MessageBundleManager;
+import co.com.binariasystems.fmw.util.messagebundle.PropertiesManager;
 import co.com.binariasystems.fmw.vweb.constants.VWebCommonConstants;
 import co.com.binariasystems.gestpymesoc.business.bean.GestPymeSOCSystemBean;
 import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
 import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessUtils;
-import co.com.binariasystems.gestpymesoc.web.resources.resources;
 import co.com.binariasystems.gestpymesoc.web.utils.GPSWebConstants;
 
 /**
@@ -39,13 +38,13 @@ public class GestPymeSOCContextListener implements ServletContextListener, GPSWe
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-    	MessageBundleManager messages = MessageBundleManager.forPath(resources.getMessageFilePath(MAIN_MESSAGES_FILE));
-    	String appVersion = sce.getServletContext().getInitParameter(GestPymeSOCBusinessConstants.APPLICATION_VERSION_PROPERTY);
-    	System.setProperty(GestPymeSOCBusinessConstants.APPLICATION_VERSION_PROPERTY, appVersion);
-    	System.setProperty(GestPymeSOCBusinessConstants.APPLICATION_NAME_PROPERTY, messages.getString(GestPymeSOCBusinessConstants.APPLICATION_NAME_PROPERTY));
+    	PropertiesManager properties = PropertiesManager.forPath("/configuration.properties");
+    	System.setProperty(GestPymeSOCBusinessConstants.APPLICATION_VERSION_PROPERTY, properties.getString(GestPymeSOCBusinessConstants.APPLICATION_VERSION_PROPERTY));
+    	System.setProperty(GestPymeSOCBusinessConstants.APPLICATION_NAME_PROPERTY, properties.getString(GestPymeSOCBusinessConstants.APPLICATION_NAME_PROPERTY));
+    	System.setProperty(GestPymeSOCBusinessConstants.MAIN_DATASOURCE_PROPERTY, properties.getString(GestPymeSOCBusinessConstants.MAIN_DATASOURCE_PROPERTY));
     	
     	IOCHelper.setProvider(SpringIOCProvider.configure(WebApplicationContextUtils.getRequiredWebApplicationContext(sce.getServletContext())));
-    	DBUtil.init(IOCHelper.getBean("GestPymeSOCDS", DataSource.class));
+    	DBUtil.init(IOCHelper.getBean(GestPymeSOCBusinessUtils.getMainDataSourceName(), DataSource.class));
     	Class resourceLoaderClass = IOCHelper.getBean(FMWConstants.APPLICATION_DEFAULT_CLASS_FOR_RESOURCE_LOAD_IOC_KEY, Class.class);
     	String entitiesStringsFilePath = IOCHelper.getBean(VWebCommonConstants.APP_ENTITIES_MESSAGES_FILE_IOC_KEY, String.class);
     	String entityOperatiosShowSql = IOCHelper.getBean(FMWEntityConstants.ENTITY_OPERATIONS_SHOWSQL_IOC_KEY, String.class);
