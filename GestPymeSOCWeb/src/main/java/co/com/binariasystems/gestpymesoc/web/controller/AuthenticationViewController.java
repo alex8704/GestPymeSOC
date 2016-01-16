@@ -24,7 +24,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
 
 @ViewController
-public class AuthenticationViewController extends AbstractViewController implements ClickListener{
+public class AuthenticationViewController extends AbstractViewController{
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationViewController.class);
 	
 	@ViewField private TextFieldBuilder					usernameTxt;
@@ -34,10 +34,12 @@ public class AuthenticationViewController extends AbstractViewController impleme
 	@ViewField private BeanItem<AuthenticationDTO> 		dataSource;
 	@ViewField private FieldGroup 						fieldGroup;
 	@ViewField private FormPanel						loginForm;
+	private AuthentiationViewClickListener 				clickListener;
 	
 	@Init
 	public void init(){
-		authenticateBtn.addClickListener(this);
+		clickListener = new AuthentiationViewClickListener();
+		authenticateBtn.addClickListener(clickListener);
 	}
 	
 	@OnLoad
@@ -50,13 +52,20 @@ public class AuthenticationViewController extends AbstractViewController impleme
 			dataSource.getItemProperty(propertyId).setValue(null);
 	}
 
-	@Override
-	public void buttonClick(ClickEvent event) {
-		try {
-			loginForm.validate();
-			LOGGER.info("Autenticando: [username:{}, password:{}, rememberMe:{}]", dataSource.getBean().getUsername(), dataSource.getBean().getPassword(), dataSource.getBean().getRememberMe());
-		} catch (FormValidationException ex) {
-			MessageDialog.showExceptions(ex, LOGGER);
+	public void loginButtonClick() throws FormValidationException {
+		loginForm.validate();
+		LOGGER.info("Autenticando: [username:{}, password:{}, rememberMe:{}]", dataSource.getBean().getUsername(), dataSource.getBean().getPassword(), dataSource.getBean().getRememberMe());
+	}
+	
+	
+	private class AuthentiationViewClickListener implements ClickListener{
+		@Override public void buttonClick(ClickEvent event) {
+			try {
+				loginButtonClick();
+			} catch (FormValidationException ex) {
+				MessageDialog.showExceptions(ex, LOGGER);
+			}
 		}
+		
 	}
 }
