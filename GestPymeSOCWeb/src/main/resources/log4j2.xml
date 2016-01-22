@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="debug" strict="false" name="GestPymeSOCLogginConfig">
+<Configuration status="warn" strict="false" name="GestPymeSOCLogginConfig">
 	<Properties>
 		<Property name="filename">/opt/GestPymeSOC/logs/application.log</Property>
 	</Properties>
@@ -44,16 +44,21 @@
 			<AppenderRef ref="AsyncStdout" />
 			<AppenderRef ref="DefaultAsyncRollingAppender" />
 		</Logger>
+		
+<!-- 		<Logger name="org.springframework" additivity="false" level="debug"> -->
+<!-- 			<AppenderRef ref="AsyncStdout" /> -->
+<!-- 			<AppenderRef ref="DefaultAsyncRollingAppender" /> -->
+<!-- 		</Logger> -->
 	
-		<Logger name="org.apache.shiro" additivity="false" level="debug">
-			<AppenderRef ref="AsyncStdout" />
-			<AppenderRef ref="DefaultAsyncRollingAppender" />
-		</Logger>
+<!-- 		<Logger name="org.apache.shiro" additivity="false" level="debug"> -->
+<!-- 			<AppenderRef ref="AsyncStdout" /> -->
+<!-- 			<AppenderRef ref="DefaultAsyncRollingAppender" /> -->
+<!-- 		</Logger> -->
 	
-		<Logger name="org.atmosphere" additivity="false" level="debug">
-			<AppenderRef ref="AsyncStdout" />
-			<AppenderRef ref="DefaultAsyncRollingAppender" />
-		</Logger>
+<!-- 		<Logger name="org.atmosphere" additivity="false" level="debug"> -->
+<!-- 			<AppenderRef ref="AsyncStdout" /> -->
+<!-- 			<AppenderRef ref="DefaultAsyncRollingAppender" /> -->
+<!-- 		</Logger> -->
 		
 		<!-- ****************************************************************************************************************** 
 				Categoria root (raiz), prioridad INFO, por Consola 

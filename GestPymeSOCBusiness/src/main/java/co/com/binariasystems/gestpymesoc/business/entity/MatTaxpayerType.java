@@ -55,50 +55,34 @@ public class MatTaxpayerType implements Serializable {
     @Column(name = "DESCRIPCION")
     private String description;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "RETEFUENTE_RENTA_APLICABLE")
     private SN2Boolean isIncomeRetentionTarget;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "RETEFUENTE_IVA_APLICABLE")
     private SN2Boolean isIVARetentionTarget;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "RETEFUENTE_ICA_APLICABLE")
     private SN2Boolean isICARetentionTarget;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "RETEFUENTE_CRE_APLICABLE")
     private SN2Boolean isCREERetentionTarget;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "DECLARA_IVA")
     private SN2Boolean responsibleOfIVA;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "DECLARA_RENTA")
     private SN2Boolean responsibleOfIncome;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "DECLARA_ICA")
     private SN2Boolean responsibleOfICA;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "DECLARA_CREE")
     private SN2Boolean responsibleOfCREE;

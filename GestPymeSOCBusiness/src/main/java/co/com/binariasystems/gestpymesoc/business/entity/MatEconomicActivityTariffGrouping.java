@@ -45,8 +45,6 @@ public class MatEconomicActivityTariffGrouping implements Serializable {
     @Column(name = "ID_GRUPO_TARIFARIO")
     private Integer tariffGroupingId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 64)
     @Enumerated(EnumType.STRING)
     @Column(name = "COD_RUBRO_ECONOMICO")
     private EconomicCategory economicCategory;

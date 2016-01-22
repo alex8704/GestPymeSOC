@@ -48,12 +48,6 @@
 		<property name="password" value="${jdbc.pass}"/>
 	</bean>
 	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="${entityManagerFactory.dataSourceName}"/>
-	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	
 	<bean id="databaseMigrator" class="co.com.binariasystems.fmw.util.db.DatabaseMigrator" init-method="executeDatabaseMigration">
 		<property name="dataSource" ref="${entityManagerFactory.dataSourceName}"/>
 		<property name="loaderClass" ref="application.default.resorceLoaderClass"/>
@@ -92,6 +86,12 @@
 		</property>
 	</bean>
 	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager" />
+	
 	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="database" value="${databaseSystem}" />
 		<property name="showSql" value="${jpaImpl.show_sql}"/>
@@ -106,7 +106,7 @@
 	
 	<bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	
-	<jpa:repositories base-package="co.com.binariasystems.gestpymesoc.business.dao"/>
+	<jpa:repositories base-package="co.com.binariasystems.gestpymesoc.business.dao" named-queries-location="${repositoryCfg.named_queries_location}"/>
 	
 	<!-- **********************************************************************************************************
 									JAVAMAIL-VELOCITY MECHANISM CONFIGURATION

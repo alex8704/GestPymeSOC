@@ -50,8 +50,6 @@ public class GptPayrollSettlementPeriod implements Serializable {
     @Column(name = "DESCRIPCION")
     private String description;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
     @Enumerated(EnumType.STRING)
     @Column(name = "COD_TIPO_PERIODO_NOMINA")
     private PayrollPeriodType payrollPeriodType;
@@ -66,8 +64,6 @@ public class GptPayrollSettlementPeriod implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date terminationDate;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_LIQUIDADO")
     private SN2Boolean isSettled;

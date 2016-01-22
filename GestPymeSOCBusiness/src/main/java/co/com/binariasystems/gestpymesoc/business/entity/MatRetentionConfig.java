@@ -45,12 +45,9 @@ public class MatRetentionConfig implements Serializable {
     @Column(name = "ID_CONFIG_RETENCION")
     private Integer retentionConfigId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 64)
     @Enumerated(EnumType.STRING)
     @Column(name = "COD_TIPO_RETENCION")
     private RetentionTaxtType retentionTaxtType;
-    @Size(max = 64)
     @Enumerated(EnumType.STRING)
     @Column(name = "COD_TIPO_PERSONA")
     private PersonType personType;

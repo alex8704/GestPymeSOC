@@ -48,11 +48,9 @@ public class MatPaymentConcept implements Serializable {
     @Size(max = 128)
     @Column(name = "DESCRIPCION")
     private String description;
-    @Size(max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "APLICA_EMPLEADOS")
     private SN2Boolean forEmployees;
-    @Size(max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "APLICA_PROVEEDORES")
     private SN2Boolean forProviders;

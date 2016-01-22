@@ -50,20 +50,14 @@ public class GptEmploymentContract implements Serializable {
     @Column(name = "VLR_SALARIO_BASE")
     private Double baseSalaryValue;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_VIGENTE")
     private SN2Boolean isCurrent;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_SALARIO_INTEGRAL")
     private SN2Boolean isFullSalary;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "DERECHO_RECARGOS")
     private SN2Boolean haveSurcharge;
@@ -76,8 +70,6 @@ public class GptEmploymentContract implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date terminationDate;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
     @Enumerated(EnumType.STRING)
     @Column(name = "COD_TIPO_TERMINO")
     private ContractTermType termType;

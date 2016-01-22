@@ -53,8 +53,6 @@ public class MatState implements Serializable {
     @Column(name = "DESCRIPCION")
     private String description;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_ACTIVO")
     private SN2Boolean isActive;

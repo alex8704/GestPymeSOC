@@ -48,15 +48,12 @@ public class GptWorkTimeReport implements Serializable {
     @Column(name = "HORA_SALIDA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date departTime;
-    @Size(max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_TURNO")
     private SN2Boolean isTurn;
-    @Size(max = 15)
     @Enumerated(EnumType.STRING)
     @Column(name = "COD_TIPO_TURNO")
     private WorkTurnType workTurnType;
-    @Size(max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_DESCANSO")
     private SN2Boolean isRecess;

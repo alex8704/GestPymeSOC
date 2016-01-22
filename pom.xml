@@ -19,6 +19,7 @@
 		<javaee.version>6.0</javaee.version>
 		<reflections.version>0.9.10</reflections.version>
 		<retrofit.version>2.0.0-beta3</retrofit.version>
+		<gson.version>2.4</gson.version>
 		<application.widgetset>co.com.binariasystems.gestpymesoc.web.gwt.widgetset.GestPymeSOCWidgetset</application.widgetset>
 		<application.basepackage>co/com/binariasystems/gestpymesoc</application.basepackage>
 		<webModule.themename>binaria</webModule.themename>
@@ -202,6 +203,48 @@
 		</dependency>
 		<!-- ******************************************* Spring, Vaadin and Shiro 
 			Dependencies END ******************************************* -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.com.binariasystems</groupId>
+			<artifactId>OrionServicesClient</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.com.binariasystems</groupId>
+			<artifactId>OrionSecurityModel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.com.binariasystems</groupId>
+			<artifactId>binaria-fmw</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.com.binariasystems</groupId>
+			<artifactId>binaria-fmw-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.com.binariasystems</groupId>
+			<artifactId>binaria-fmw-business</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>co.com.binariasystems</groupId>
+			<artifactId>binaria-fmw-security</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<!-- Testing -->
 		<dependency>

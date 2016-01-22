@@ -46,8 +46,6 @@ public class MatPensionFundAdminCompany implements Serializable {
     @Column(name = "NOMBRE")
     private String name;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_VIGENTE")
     private SN2Boolean isActive;
