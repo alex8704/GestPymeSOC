@@ -112,4 +112,15 @@ public class SecurityBeanImpl implements SecurityBean{
 			throw new FMWSecurityException(FMWExceptionUtils.prettyMessageException(ex));
 		}
 	}
+
+	@Override
+	public List<ResourceDTO> findUserResources(Integer userId, Integer applicationId) throws FMWSecurityException {
+		Call<List<ResourceDTO>> serviceCall = securityClient.findUserResources(userId, applicationId);
+		try{
+			Response<List<ResourceDTO>> serviceResponse = serviceCall.execute();
+			return serviceResponse.body();
+		}catch(IOException ex){
+			throw new FMWSecurityException(FMWExceptionUtils.prettyMessageException(ex));
+		}
+	}
 }

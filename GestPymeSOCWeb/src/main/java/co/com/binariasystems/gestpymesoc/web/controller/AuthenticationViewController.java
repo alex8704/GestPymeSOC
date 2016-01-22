@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import co.com.binariasystems.fmw.security.FMWSecurityException;
 import co.com.binariasystems.fmw.security.mgt.SecurityManager;
 import co.com.binariasystems.fmw.security.model.AuthenticationRequest;
-import co.com.binariasystems.fmw.security.model.AuthorizationRequest;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.Init;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewController;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewController.OnLoad;
@@ -21,11 +20,9 @@ import co.com.binariasystems.fmw.vweb.uicomponet.MessageDialog.Type;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.ButtonBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.PasswordFieldBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.TextFieldBuilder;
-import co.com.binariasystems.fmw.vweb.util.VWebUtils;
 import co.com.binariasystems.gestpymesoc.business.dto.AuthenticationDTO;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.server.Page;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServletRequest;
 import com.vaadin.ui.Button.ClickEvent;
@@ -78,15 +75,7 @@ public class AuthenticationViewController extends AbstractViewController{
 		authRequest.setHttpRequest(getVaadinRequest().getHttpServletRequest());
 		securityManager.authenticate(authRequest);
 		
-		new MessageDialog("Bienvenido", "La validaci\u00f3n de las credenciales de autenticaci\u00f3n ha sida satisfactoria", Type.INFORMATION)
-		.addYesClickListener(new ClickListener() {
-			@Override
-			public void buttonClick(ClickEvent event) {
-				securityManager.logout(new AuthorizationRequest(null, getVaadinRequest().getHttpServletRequest(), getVaadinRequest().getSession()));
-				UI.getCurrent().getSession().close();
-				Page.getCurrent().setLocation(VWebUtils.getContextPath());
-			}
-		}).show();
+		UI.getCurrent().getPage().setUriFragment(securityManager.getDashBoardViewUrl());
 	}
 	
 	
