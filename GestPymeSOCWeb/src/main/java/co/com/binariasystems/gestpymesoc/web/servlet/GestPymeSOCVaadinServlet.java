@@ -19,11 +19,12 @@ import com.vaadin.server.VaadinServlet;
 @VaadinServletConfiguration(ui = GestPymeSOC.class, productionMode = false)
 public class GestPymeSOCVaadinServlet extends VaadinServlet {
 	private GestPymeSOCSessionListener sessionListener = new GestPymeSOCSessionListener();
-	private GestPymeSOCSystemMessagesProvider systemMessagesProvider = new GestPymeSOCSystemMessagesProvider();
+	private GestPymeSOCSystemMessagesProvider systemMessagesProvider;
 	@Override
 	protected void servletInitialized() throws ServletException {
 		super.servletInitialized();
 		
+		systemMessagesProvider = new GestPymeSOCSystemMessagesProvider(getServletContext().getContextPath());
 		getService().addSessionInitListener(sessionListener);
 		getService().addSessionDestroyListener(sessionListener);
 		getService().setSystemMessagesProvider(systemMessagesProvider);
