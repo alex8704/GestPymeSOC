@@ -71,8 +71,8 @@ public class SecurityBeanImpl implements SecurityBean{
 	}
 
 	@Override
-	public List<RoleDTO> findUserRoles(AuthenticationDTO authentication) throws FMWSecurityException {
-		Call<List<RoleDTO>> serviceCall = securityClient.findUserRoles(authentication);
+	public List<RoleDTO> findUserRoles(AccessTokenDTO accessToken) throws FMWSecurityException {
+		Call<List<RoleDTO>> serviceCall = securityClient.findUserRoles(accessToken);
 		try{
 			Response<List<RoleDTO>> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();
@@ -104,8 +104,8 @@ public class SecurityBeanImpl implements SecurityBean{
 	}
 
 	@Override
-	public void invalidateUserSession(AuthenticationDTO authentication) throws FMWSecurityException {
-		Call<Void> serviceCall = securityClient.invalidateUserSession(authentication);
+	public void invalidateUserSession(AccessTokenDTO accessToken) throws FMWSecurityException {
+		Call<Void> serviceCall = securityClient.invalidateUserSession(accessToken);
 		try{
 			serviceCall.execute().body();
 		}catch(IOException ex){
@@ -114,8 +114,8 @@ public class SecurityBeanImpl implements SecurityBean{
 	}
 
 	@Override
-	public List<ResourceDTO> findUserResources(Integer userId, Integer applicationId) throws FMWSecurityException {
-		Call<List<ResourceDTO>> serviceCall = securityClient.findUserResources(userId, applicationId);
+	public List<ResourceDTO> findUserResources(AccessTokenDTO accessToken) throws FMWSecurityException {
+		Call<List<ResourceDTO>> serviceCall = securityClient.findUserResources(accessToken);
 		try{
 			Response<List<ResourceDTO>> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();

@@ -14,10 +14,10 @@ import co.com.binariasystems.fmw.vweb.uicomponet.builders.ButtonBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.LabelBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.PasswordFieldBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.TextFieldBuilder;
-import co.com.binariasystems.gestpymesoc.business.dto.AuthenticationDTO;
 import co.com.binariasystems.gestpymesoc.web.controller.AuthenticationViewController;
 import co.com.binariasystems.gestpymesoc.web.resources.resources;
 import co.com.binariasystems.gestpymesoc.web.utils.GPSWebConstants;
+import co.com.binariasystems.orion.model.dto.AuthenticationDTO;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;

@@ -1,9 +1,13 @@
 package co.com.binariasystems.gestpymesoc.web.servlet;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.LocaleUtils;
 
+import co.com.binariasystems.fmw.ioc.IOCHelper;
+import co.com.binariasystems.fmw.security.mgt.SecurityManager;
+import co.com.binariasystems.fmw.security.model.AuthorizationRequest;
 import co.com.binariasystems.fmw.vweb.constants.VWebCommonConstants;
 
 import com.vaadin.server.ServiceException;
@@ -13,12 +17,15 @@ import com.vaadin.server.SessionInitEvent;
 import com.vaadin.server.SessionInitListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinServletRequest;
 
 public class GestPymeSOCSessionListener implements SessionInitListener, SessionDestroyListener {
 
 	@Override
 	public void sessionDestroy(SessionDestroyEvent event) {
-		System.out.println("Session destruida en VAADIN -----> GODD BYE");
+		VaadinRequest request = VaadinService.getCurrentRequest();
+		HttpServletRequest httpRequest = request != null ? ((VaadinServletRequest)request).getHttpServletRequest() : null;
+		getSecurityManager().logout(new AuthorizationRequest(null, httpRequest, httpRequest != null ? httpRequest.getSession() : null));
 	}
 
 	@Override
@@ -42,6 +49,10 @@ public class GestPymeSOCSessionListener implements SessionInitListener, SessionD
 		Cookie langCookie = new Cookie(VWebCommonConstants.USER_LANGUAGE_APPCOOKIE, request.getLocale().toString());
 		langCookie.setPath(request.getContextPath());
 		return langCookie;
+	}
+	
+	private SecurityManager getSecurityManager(){
+		return IOCHelper.getBean(SecurityManager.class);
 	}
 
 }

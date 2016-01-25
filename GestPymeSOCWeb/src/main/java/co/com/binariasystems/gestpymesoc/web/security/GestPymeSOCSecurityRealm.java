@@ -1,6 +1,5 @@
 package co.com.binariasystems.gestpymesoc.web.security;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +25,6 @@ import org.apache.shiro.util.ByteSource;
 
 import co.com.binariasystems.fmw.ioc.IOCHelper;
 import co.com.binariasystems.fmw.security.FMWSecurityException;
-import co.com.binariasystems.fmw.security.authc.SecurityPrincipalConverter;
 import co.com.binariasystems.gestpymesoc.business.bean.RealmBusinessBean;
 import co.com.binariasystems.gestpymesoc.business.bean.SecurityBean;
 import co.com.binariasystems.orion.model.dto.AccessTokenDTO;
@@ -39,14 +37,12 @@ import co.com.binariasystems.orionclient.OrionClientException;
 
 public class GestPymeSOCSecurityRealm extends AuthorizingRealm {
 	private RealmBusinessBean businessBean;
-	private SecurityPrincipalConverter principalConverter;
 	protected boolean permissionsLookupEnabled = false;
 	private String applicationCode;
 	private Application application;
 
 	public GestPymeSOCSecurityRealm() {
 		businessBean = IOCHelper.getBean(SecurityBean.class);
-		principalConverter = IOCHelper.getBean(SecurityPrincipalConverter.class);
 		setCredentialsMatcher(new CredentialsMatcher() {
 			/**
 			 * Dummy credentials matcher because, Orion perform all validations
@@ -57,30 +53,23 @@ public class GestPymeSOCSecurityRealm extends AuthorizingRealm {
 		});
 	}
 
-	
-	@SuppressWarnings("unchecked")
-	private String getUsernameForPrincipal(Object principal){
-		AccessTokenDTO accessToken = (AccessTokenDTO)principal;
-		return accessToken.getUser().getLoginAlias();
-	}
-
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		if (principals == null) {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
         }
 		
-		String username = getUsernameForPrincipal(getAvailablePrincipal(principals));
+		AccessTokenDTO accessToken = (AccessTokenDTO)getAvailablePrincipal(principals);
 		Set<String> roleNames = new LinkedHashSet<String>();
         Set<String> permissions = new LinkedHashSet<String>();
         List<ResourceDTO>  roleResources = null;
         
-        List<RoleDTO> userRoles = getUserRoles(username);
+        List<RoleDTO> userRoles = getUserRoles(accessToken);
         for(RoleDTO role : userRoles)
         	roleNames.add(role.getName());
         
         if(permissionsLookupEnabled){
-        	roleResources = getRoleResources(username, userRoles);
+        	roleResources = getUserResources(accessToken);
         	for(ResourceDTO resource : roleResources)
         		permissions.add(resource.getResourcePath());
         }
@@ -100,7 +89,8 @@ public class GestPymeSOCSecurityRealm extends AuthorizingRealm {
 		SimpleAuthenticationInfo info = null;
 		AccessTokenDTO accessToken = null;
 		try{
-			accessToken = businessBean.saveAuthentication(new AuthenticationDTO(username, new String(upToken.getPassword()), (application != null ? application.name() : null)));
+			accessToken = businessBean.saveAuthentication(new AuthenticationDTO(username, new String(upToken.getPassword()), 
+					(application != null ? application.name() : null), upToken.getHost()));
 		}catch(OrionClientException ex){
 			throw traduceOrionClientException(ex);
 		} catch (FMWSecurityException ex) {
@@ -115,27 +105,24 @@ public class GestPymeSOCSecurityRealm extends AuthorizingRealm {
 		return info;
 	}
 	
-	protected List<RoleDTO> getUserRoles(String username){
-        List<RoleDTO> userRoles;
+	protected List<RoleDTO> getUserRoles(AccessTokenDTO accessToken){
 		try {
-			userRoles = businessBean.findUserRoles(new AuthenticationDTO(username, null, (application != null ? application.name() : null)));
-		} catch (FMWSecurityException ex) {
+			return businessBean.findUserRoles(accessToken);
+		} catch(OrionClientException ex){
+			throw traduceOrionClientException(ex);
+		}catch (FMWSecurityException ex) {
 			throw new AuthorizationException(ex.getMessage());
 		}
-        return userRoles;
     }
 	
-	protected List<ResourceDTO> getRoleResources(String username, List<RoleDTO> userRoles){
-        List<ResourceDTO>  roleResources = new ArrayList<ResourceDTO>();
+	protected List<ResourceDTO> getUserResources(AccessTokenDTO accessToken){
     	try { 
-    		for(RoleDTO role : userRoles){
-    			roleResources.addAll(businessBean.findRoleResources(role));
-			}
-		} catch (FMWSecurityException ex) {
+    		return businessBean.findUserResources(accessToken);
+		} catch(OrionClientException ex){
+			throw traduceOrionClientException(ex);
+		}catch (FMWSecurityException ex) {
 			throw new AuthorizationException(ex.getMessage());
 		}
-
-        return roleResources;
     }
 	
 	private AuthenticationException traduceOrionClientException(OrionClientException ex){
@@ -165,20 +152,6 @@ public class GestPymeSOCSecurityRealm extends AuthorizingRealm {
 	 */
 	public void setBusinessBean(RealmBusinessBean businessBean) {
 		this.businessBean = businessBean;
-	}
-
-	/**
-	 * @return the principalConverter
-	 */
-	public SecurityPrincipalConverter getPrincipalConverter() {
-		return principalConverter;
-	}
-
-	/**
-	 * @param principalConverter the principalConverter to set
-	 */
-	public void setPrincipalConverter(SecurityPrincipalConverter principalConverter) {
-		this.principalConverter = principalConverter;
 	}
 
 	/**

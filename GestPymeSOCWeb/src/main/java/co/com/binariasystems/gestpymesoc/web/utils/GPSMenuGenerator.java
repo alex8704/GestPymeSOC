@@ -60,8 +60,8 @@ public class GPSMenuGenerator {
 	}
 	
 	private List<ResourceDTO> getAuthorizedResources(HttpServletRequest httpRequest) throws FMWSecurityException{
-		AccessTokenDTO userInfo = auditoryDataProvider.getCurrenAuditoryUserByServletRequest(httpRequest);
-		return securityBean.findUserResources(userInfo.getUser().getUserId(), userInfo.getApplication().getApplicationId());
+		AccessTokenDTO accessToken = auditoryDataProvider.getCurrenAuditoryUserByServletRequest(httpRequest);
+		return securityBean.findUserResources(accessToken);
 	}
 	
 	

@@ -16,15 +16,16 @@ import co.com.binariasystems.fmw.vweb.mvp.controller.AbstractViewController;
 import co.com.binariasystems.fmw.vweb.uicomponet.FormPanel;
 import co.com.binariasystems.fmw.vweb.uicomponet.FormValidationException;
 import co.com.binariasystems.fmw.vweb.uicomponet.MessageDialog;
-import co.com.binariasystems.fmw.vweb.uicomponet.MessageDialog.Type;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.ButtonBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.PasswordFieldBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.TextFieldBuilder;
-import co.com.binariasystems.gestpymesoc.business.dto.AuthenticationDTO;
+import co.com.binariasystems.orion.model.dto.AuthenticationDTO;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServletRequest;
+import com.vaadin.server.WebBrowser;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
@@ -67,14 +68,14 @@ public class AuthenticationViewController extends AbstractViewController{
 
 	public void loginButtonClick() throws FormValidationException, FMWSecurityException {
 		loginForm.validate();
-		LOGGER.info("Autenticando: [username:{}, password:{}, rememberMe:{}]", authenticationDTO.getUsername(), authenticationDTO.getPassword(), authenticationDTO.getRememberMe());
+		WebBrowser browser = Page.getCurrent().getWebBrowser();
 		AuthenticationRequest authRequest = new AuthenticationRequest();
 		authRequest.setUsername(authenticationDTO.getUsername());
 		authRequest.setPassword(authenticationDTO.getPassword());
 		authRequest.setRememberMe(authenticationDTO.getRememberMe());
 		authRequest.setHttpRequest(getVaadinRequest().getHttpServletRequest());
+		authRequest.setHost(browser.getAddress());
 		securityManager.authenticate(authRequest);
-		
 		UI.getCurrent().getPage().setUriFragment(securityManager.getDashBoardViewUrl());
 	}
 	

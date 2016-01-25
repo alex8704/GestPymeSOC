@@ -14,9 +14,9 @@ public interface RealmBusinessBean {
 	public UserDTO findUserByLoginAlias(String loginAlias) throws FMWSecurityException;
 	public UserCredentialsDTO findUserCredentials(String loginAlias) throws FMWSecurityException;
 	public AccessTokenDTO saveAuthentication(AuthenticationDTO authentication) throws FMWSecurityException;
-	public List<RoleDTO> findUserRoles(AuthenticationDTO authentication) throws FMWSecurityException;
+	public List<RoleDTO> findUserRoles(AccessTokenDTO accessToken) throws FMWSecurityException;
 	public List<ResourceDTO> findRoleResources(RoleDTO role) throws FMWSecurityException;
 	public boolean validateAccessTokenValidity(AccessTokenDTO accessToken) throws FMWSecurityException;
-	public void invalidateUserSession(AuthenticationDTO authentication) throws FMWSecurityException;
-	public List<ResourceDTO> findUserResources(Integer userId, Integer applicationId) throws FMWSecurityException;
+	public void invalidateUserSession(AccessTokenDTO accessToken) throws FMWSecurityException;
+	public List<ResourceDTO> findUserResources(AccessTokenDTO accessToken) throws FMWSecurityException;
 }

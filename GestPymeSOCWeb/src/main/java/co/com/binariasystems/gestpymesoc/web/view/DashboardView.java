@@ -1,23 +1,31 @@
 package co.com.binariasystems.gestpymesoc.web.view;
 
+import static co.com.binariasystems.fmw.vweb.uicomponet.builders.Builders.button;
+import static co.com.binariasystems.fmw.vweb.uicomponet.builders.Builders.label;
+import static co.com.binariasystems.fmw.vweb.uicomponet.builders.Builders.treeMenu;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.DashBoard;
+import co.com.binariasystems.fmw.vweb.mvp.annotation.Init;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View.Root;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewBuild;
 import co.com.binariasystems.fmw.vweb.mvp.views.AbstractView;
-import co.com.binariasystems.fmw.vweb.uicomponet.PanelGroup;
 import co.com.binariasystems.fmw.vweb.uicomponet.TreeMenu;
+import co.com.binariasystems.fmw.vweb.uicomponet.builders.ButtonBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.LabelBuilder;
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessUtils;
 import co.com.binariasystems.gestpymesoc.web.controller.DashboardViewController;
 import co.com.binariasystems.gestpymesoc.web.utils.GPSWebConstants;
 
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Sizeable.Unit;
+import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.VerticalSplitPanel;
+import com.vaadin.ui.themes.ValoTheme;
 
 @DashBoard
 @Root(contentSetterMethod="setCurrentView")
@@ -25,47 +33,83 @@ import com.vaadin.ui.VerticalSplitPanel;
 public class DashboardView extends AbstractView implements GPSWebConstants {
 	public static final String		MESSAGES_BUNDLE = GPSWebConstants.MESSAGES_PACKAGE + "." + MAIN_MESSAGES_FILE;
 	private VerticalLayout mainContainer;
-	private HorizontalLayout topPanel;
+	private HorizontalLayout logoAndTrademarkPanel;
 	private HorizontalSplitPanel menuDivisorSplitPanel;
 	private VerticalSplitPanel centralSplitPanel;
-	private PanelGroup accountInfoPanel;
+	private HorizontalLayout topPanel;
+	private HorizontalLayout accountInfoPanel;
+	
 	private LabelBuilder welcomeLbl;
-	private Label currentUserNameLbl;
+	private LabelBuilder currentUserNameLbl;
+	private LabelBuilder loginAliasLbl;
+	private LabelBuilder netAddressLbl;
+	private LabelBuilder authenticationDateLbl;
 	private TreeMenu treeMenu;
+	private ButtonBuilder logoutBtn;
 	
 	
 	@ViewBuild
 	public Component build(){
 		mainContainer = new VerticalLayout();
-		topPanel = new HorizontalLayout();
+		logoAndTrademarkPanel = new HorizontalLayout();
 		menuDivisorSplitPanel = new HorizontalSplitPanel();
 		centralSplitPanel = new VerticalSplitPanel();
-		accountInfoPanel = new PanelGroup(2);
-		treeMenu = new TreeMenu();
-		welcomeLbl = new LabelBuilder();
-		currentUserNameLbl = new Label();
+		accountInfoPanel = new HorizontalLayout();
+		topPanel = new HorizontalLayout();
+		treeMenu = treeMenu();
+		welcomeLbl = label();
+		currentUserNameLbl = label();
+		loginAliasLbl = label();
+		netAddressLbl = label();
+		authenticationDateLbl = label();
+		logoutBtn = button(FontAwesome.SIGN_OUT);
 		
-		mainContainer.addComponent(topPanel);
+		mainContainer.addComponent(logoAndTrademarkPanel);
 		mainContainer.addComponent(menuDivisorSplitPanel);
-		mainContainer.setSizeFull();
-		mainContainer.setExpandRatio(menuDivisorSplitPanel, 1.0f);
-		
-		topPanel.setHeight(40, Unit.PIXELS);
 		
 		menuDivisorSplitPanel.setFirstComponent(treeMenu);
 		menuDivisorSplitPanel.setSecondComponent(centralSplitPanel);
-		menuDivisorSplitPanel.setSplitPosition(250, Unit.PIXELS);
 		
-		centralSplitPanel.setFirstComponent(accountInfoPanel);
-		centralSplitPanel.setSplitPosition(25, Unit.PIXELS);
-		centralSplitPanel.setLocked(true);
+		centralSplitPanel.setFirstComponent(topPanel);
 		
-		accountInfoPanel.add(welcomeLbl);
-		accountInfoPanel.add(currentUserNameLbl);
+		topPanel.addComponent(accountInfoPanel);
+		topPanel.addComponent(logoutBtn);
 		
-		welcomeLbl.boldStyle();
+		accountInfoPanel.addComponent(welcomeLbl);
+		accountInfoPanel.addComponent(currentUserNameLbl);
+		accountInfoPanel.addComponent(loginAliasLbl);
+		accountInfoPanel.addComponent(label("|"));
+		accountInfoPanel.addComponent(netAddressLbl);
+		accountInfoPanel.addComponent(label("|"));
+		accountInfoPanel.addComponent(authenticationDateLbl);
 		
 		return mainContainer;
+	}
+	
+	@Init
+	public void init(){
+		mainContainer.setSizeFull();
+		mainContainer.setExpandRatio(menuDivisorSplitPanel, 1.0f);
+		
+		logoAndTrademarkPanel.setHeight(40, Unit.PIXELS);
+		
+		menuDivisorSplitPanel.setSplitPosition(250, Unit.PIXELS);
+		
+		centralSplitPanel.setMaxSplitPosition(30, Unit.PIXELS);
+		centralSplitPanel.setLocked(true);
+		
+		accountInfoPanel.setSpacing(true);
+		accountInfoPanel.setMargin(new MarginInfo(false, true, false, true));
+		
+		topPanel.setWidth(100, Unit.PERCENTAGE);
+		//topPanel.setExpandRatio(logoutBtn, 1.0f);
+		topPanel.setComponentAlignment(logoutBtn, Alignment.TOP_RIGHT);
+		
+		currentUserNameLbl.boldStyle();
+		loginAliasLbl.boldStyle();
+		logoutBtn.withStyleNames(ValoTheme.BUTTON_LINK);
+		
+		treeMenu.setTitle(GestPymeSOCBusinessUtils.getApplicationName());
 	}
 	
 	

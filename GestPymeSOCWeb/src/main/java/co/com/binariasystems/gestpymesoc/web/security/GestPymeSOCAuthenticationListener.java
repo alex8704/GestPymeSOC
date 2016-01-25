@@ -13,7 +13,6 @@ import co.com.binariasystems.fmw.security.FMWSecurityException;
 import co.com.binariasystems.gestpymesoc.business.bean.RealmBusinessBean;
 import co.com.binariasystems.gestpymesoc.business.bean.SecurityBean;
 import co.com.binariasystems.orion.model.dto.AccessTokenDTO;
-import co.com.binariasystems.orion.model.dto.AuthenticationDTO;
 
 public class GestPymeSOCAuthenticationListener implements AuthenticationListener{
 	private static final Logger LOGGER = LoggerFactory.getLogger(GestPymeSOCAuthenticationListener.class);
@@ -37,7 +36,7 @@ public class GestPymeSOCAuthenticationListener implements AuthenticationListener
 		AccessTokenDTO accessToken= (AccessTokenDTO)getAvailablePrincipal(principals);
 		if(accessToken != null){
 			try {
-				businessBean.invalidateUserSession(new AuthenticationDTO(accessToken.getUser().getLoginAlias(), accessToken.getApplication().getApplicationCode().name()));
+				businessBean.invalidateUserSession(accessToken);
 			} catch (FMWSecurityException ex) {
 				LOGGER.error("Has ocurred an unexpected error while invalidate user session", ex);
 			}
