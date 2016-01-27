@@ -2,6 +2,7 @@ package co.com.binariasystems.gestpymesoc.web.view;
 
 import co.com.binariasystems.fmw.vweb.constants.UIConstants;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.AuthenticationForm;
+import co.com.binariasystems.fmw.vweb.mvp.annotation.NoConventionString;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View.Root;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewBuild;
@@ -35,6 +36,7 @@ import com.vaadin.ui.VerticalLayout;
 public class AuthenticationView extends AbstractView implements UIConstants, GPSWebConstants{
 	public static final String		MESSAGES_BUNDLE = GPSWebConstants.MESSAGES_PACKAGE + "." + MAIN_MESSAGES_FILE;
 	private VerticalLayout 				mainContainer;
+	@NoConventionString
 	private FormPanel					loginForm;
 	private Image						applicationLogo;
 	private LabelBuilder				welcomeLbl;
