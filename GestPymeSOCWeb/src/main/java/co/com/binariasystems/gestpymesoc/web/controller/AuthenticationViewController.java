@@ -13,6 +13,7 @@ import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewController.OnLoad;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewController.OnUnLoad;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewField;
 import co.com.binariasystems.fmw.vweb.mvp.controller.AbstractViewController;
+import co.com.binariasystems.fmw.vweb.mvp.dispatcher.MVPUtils;
 import co.com.binariasystems.fmw.vweb.uicomponet.FormPanel;
 import co.com.binariasystems.fmw.vweb.uicomponet.FormValidationException;
 import co.com.binariasystems.fmw.vweb.uicomponet.MessageDialog;
@@ -29,7 +30,6 @@ import com.vaadin.server.WebBrowser;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.UI;
 
 @ViewController
 public class AuthenticationViewController extends AbstractViewController{
@@ -76,7 +76,7 @@ public class AuthenticationViewController extends AbstractViewController{
 		authRequest.setHttpRequest(getVaadinRequest().getHttpServletRequest());
 		authRequest.setHost(browser.getAddress());
 		securityManager.authenticate(authRequest);
-		UI.getCurrent().getPage().setUriFragment(securityManager.getDashBoardViewUrl());
+		MVPUtils.navigateTo(securityManager.getDashBoardViewUrl());
 	}
 	
 	
