@@ -6,10 +6,9 @@
 
 package co.com.binariasystems.gestpymesoc.business.entity;
 
-import co.com.binariasystems.gestpymesoc.business.enumerated.SN2Boolean;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,19 +19,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import co.com.binariasystems.commonsmodel.enumerated.SN2Boolean;
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
+
 /**
  *
  * @author Alexander
  */
 @Entity
-@Table(name = "GPT_MOTIVOS_TERMINAC_CONTRATO")
+@Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_MOTIVOS_TERMINAC_CONTRATO")
 @NamedQueries({
     @NamedQuery(name = "GptContractTerminationReason.findAll", query = "SELECT g FROM GptContractTerminationReason g")})
 public class GptContractTerminationReason implements Serializable {

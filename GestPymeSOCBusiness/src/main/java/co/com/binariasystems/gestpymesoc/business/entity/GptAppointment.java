@@ -7,11 +7,9 @@
 package co.com.binariasystems.gestpymesoc.business.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
+
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,19 +17,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
+
 /**
  *
  * @author Alexander
  */
 @Entity
-@Table(name = "GPT_CARGOS")
+@Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_CARGOS")
 @NamedQueries({
     @NamedQuery(name = "GptAppointment.findAll", query = "SELECT g FROM GptAppointment g")})
 public class GptAppointment implements Serializable {

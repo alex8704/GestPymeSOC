@@ -12,12 +12,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
+import co.com.binariasystems.mastercentral.business.entity.MatThirdPerson;
+
 /**
  *
  * @author Alexander
  */
 @Entity
-@Table(name = "GPT_PROVEEDORES")
+@Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_PROVEEDORES")
 @DiscriminatorValue("PROVEEDOR")
 @NamedQueries({
     @NamedQuery(name = "GptProvider.findAll", query = "SELECT g FROM GptProvider g")})

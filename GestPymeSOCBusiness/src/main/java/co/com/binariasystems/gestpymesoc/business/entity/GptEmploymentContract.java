@@ -6,11 +6,9 @@
 
 package co.com.binariasystems.gestpymesoc.business.entity;
 
-import co.com.binariasystems.gestpymesoc.business.enumerated.ContractTermType;
-import co.com.binariasystems.gestpymesoc.business.enumerated.SN2Boolean;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,12 +27,17 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import co.com.binariasystems.commonsmodel.enumerated.SN2Boolean;
+import co.com.binariasystems.gestpymesoc.business.enumerated.ContractTermType;
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
+import co.com.binariasystems.mastercentral.business.entity.MatCompany;
+
 /**
  *
  * @author Alexander
  */
 @Entity
-@Table(name = "GPT_CONTRATOS_LABORALES")
+@Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_CONTRATOS_LABORALES")
 @NamedQueries({
     @NamedQuery(name = "GptEmploymentContract.findAll", query = "SELECT g FROM GptEmploymentContract g")})
 public class GptEmploymentContract implements Serializable {

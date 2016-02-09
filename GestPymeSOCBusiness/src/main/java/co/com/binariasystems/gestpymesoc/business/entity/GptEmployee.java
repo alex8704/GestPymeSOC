@@ -14,12 +14,20 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
+import co.com.binariasystems.mastercentral.business.entity.MatCompany;
+import co.com.binariasystems.mastercentral.business.entity.MatHealthAdminCompany;
+import co.com.binariasystems.mastercentral.business.entity.MatMasterData;
+import co.com.binariasystems.mastercentral.business.entity.MatPensionFundAdminCompany;
+import co.com.binariasystems.mastercentral.business.entity.MatState;
+import co.com.binariasystems.mastercentral.business.entity.MatThirdPerson;
+
 /**
  *
  * @author Alexander
  */
 @Entity
-@Table(name = "GPT_EMPLEADOS")
+@Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_EMPLEADOS")
 @DiscriminatorValue("EMPLEADO")
 @NamedQueries({
     @NamedQuery(name = "GptEmployee.findAll", query = "SELECT g FROM GptEmployee g")})

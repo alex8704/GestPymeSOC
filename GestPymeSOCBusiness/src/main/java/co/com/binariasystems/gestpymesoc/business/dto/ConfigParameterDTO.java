@@ -9,7 +9,7 @@ package co.com.binariasystems.gestpymesoc.business.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import co.com.binariasystems.gestpymesoc.business.enumerated.Application;
+import co.com.binariasystems.commonsmodel.enumerated.Application;
 
 /**
  *

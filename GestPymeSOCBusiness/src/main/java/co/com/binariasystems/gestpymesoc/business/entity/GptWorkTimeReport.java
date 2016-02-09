@@ -6,10 +6,9 @@
 
 package co.com.binariasystems.gestpymesoc.business.entity;
 
-import co.com.binariasystems.gestpymesoc.business.enumerated.SN2Boolean;
-import co.com.binariasystems.gestpymesoc.business.enumerated.WorkTurnType;
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -26,12 +25,16 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import co.com.binariasystems.commonsmodel.enumerated.SN2Boolean;
+import co.com.binariasystems.gestpymesoc.business.enumerated.WorkTurnType;
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
+
 /**
  *
  * @author Alexander
  */
 @Entity
-@Table(name = "GPT_REPORTE_TIEMPO")
+@Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_REPORTE_TIEMPO")
 @NamedQueries({
     @NamedQuery(name = "GptWorkTimeReport.findAll", query = "SELECT g FROM GptWorkTimeReport g")})
 public class GptWorkTimeReport implements Serializable {

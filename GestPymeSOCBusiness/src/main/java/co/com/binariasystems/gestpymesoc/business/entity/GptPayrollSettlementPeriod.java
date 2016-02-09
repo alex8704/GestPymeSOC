@@ -6,13 +6,10 @@
 
 package co.com.binariasystems.gestpymesoc.business.entity;
 
-import co.com.binariasystems.gestpymesoc.business.enumerated.PayrollPeriodType;
-import co.com.binariasystems.gestpymesoc.business.enumerated.SN2Boolean;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,19 +21,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import co.com.binariasystems.commonsmodel.enumerated.PayrollPeriodType;
+import co.com.binariasystems.commonsmodel.enumerated.SN2Boolean;
+import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
+import co.com.binariasystems.mastercentral.business.entity.MatCompany;
+
 /**
  *
  * @author Alexander
  */
 @Entity
-@Table(name = "GPT_PERIODO_LIQUID_NOMINA")
+@Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_PERIODO_LIQUID_NOMINA")
 @NamedQueries({
     @NamedQuery(name = "GptPayrollSettlementPeriod.findAll", query = "SELECT g FROM GptPayrollSettlementPeriod g")})
 public class GptPayrollSettlementPeriod implements Serializable {

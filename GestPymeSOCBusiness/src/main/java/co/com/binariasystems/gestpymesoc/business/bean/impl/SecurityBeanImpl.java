@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import co.com.binariasystems.commonsmodel.enumerated.SN2Boolean;
 import co.com.binariasystems.fmw.security.FMWSecurityException;
 import co.com.binariasystems.fmw.util.exception.FMWExceptionUtils;
 import co.com.binariasystems.gestpymesoc.business.bean.ConfigParameterBean;
@@ -20,7 +21,6 @@ import co.com.binariasystems.orion.model.dto.ResourceDTO;
 import co.com.binariasystems.orion.model.dto.RoleDTO;
 import co.com.binariasystems.orion.model.dto.UserCredentialsDTO;
 import co.com.binariasystems.orion.model.dto.UserDTO;
-import co.com.binariasystems.orion.model.enumerated.SN2Boolean;
 import co.com.binariasystems.orionclient.ClientBuilder;
 import co.com.binariasystems.orionclient.security.SecurityClient;
 

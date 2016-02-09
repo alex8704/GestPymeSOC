@@ -8,6 +8,7 @@ package co.com.binariasystems.gestpymesoc.business.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

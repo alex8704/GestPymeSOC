@@ -23,6 +23,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
+import co.com.binariasystems.commonsmodel.enumerated.Application;
 import co.com.binariasystems.fmw.ioc.IOCHelper;
 import co.com.binariasystems.fmw.security.FMWSecurityException;
 import co.com.binariasystems.gestpymesoc.business.bean.RealmBusinessBean;
@@ -31,7 +32,6 @@ import co.com.binariasystems.orion.model.dto.AccessTokenDTO;
 import co.com.binariasystems.orion.model.dto.AuthenticationDTO;
 import co.com.binariasystems.orion.model.dto.ResourceDTO;
 import co.com.binariasystems.orion.model.dto.RoleDTO;
-import co.com.binariasystems.orion.model.enumerated.Application;
 import co.com.binariasystems.orion.model.enumerated.SecurityExceptionType;
 import co.com.binariasystems.orionclient.OrionClientException;
 
