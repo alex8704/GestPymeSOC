@@ -1,15 +1,17 @@
 package co.com.binariasystems.gestpymesoc.business.utils;
 
-public class GestPymeSOCBusinessUtils implements GestPymeSOCBusinessConstants {
+import co.com.binariasystems.commonsmodel.constants.SystemConstants;
+
+public class GestPymeSOCBusinessUtils implements GestPymeSOCBusinessConstants, SystemConstants {
 	public static String getApplicationName(){
-		return System.getProperty(APPLICATION_NAME_PROPERTY);
+		return System.getProperty(APP_NAME_PROP);
 	}
 	
 	public static String getApplicationVersion(){
-		return System.getProperty(APPLICATION_VERSION_PROPERTY);
+		return System.getProperty(APP_VERSION_PROP);
 	}
 	
 	public static String getMainDataSourceName(){
-		return System.getProperty(MAIN_DATASOURCE_PROPERTY);
+		return System.getProperty(MAIN_DSOURCE_PROP);
 	}
 }

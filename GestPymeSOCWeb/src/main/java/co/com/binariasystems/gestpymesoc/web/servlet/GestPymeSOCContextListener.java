@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import co.com.binariasystems.commonsmodel.constants.SystemConstants;
 import co.com.binariasystems.fmw.constants.FMWConstants;
 import co.com.binariasystems.fmw.entity.util.FMWEntityConstants;
 import co.com.binariasystems.fmw.ioc.IOCHelper;
@@ -36,9 +37,9 @@ public class GestPymeSOCContextListener implements ServletContextListener, GPSWe
      */
     public void contextInitialized(ServletContextEvent sce)  { 
     	PropertiesManager properties = PropertiesManager.forPath("/configuration.properties");
-    	System.setProperty(GestPymeSOCBusinessConstants.APPLICATION_VERSION_PROPERTY, properties.getString(GestPymeSOCBusinessConstants.APPLICATION_VERSION_PROPERTY));
-    	System.setProperty(GestPymeSOCBusinessConstants.APPLICATION_NAME_PROPERTY, properties.getString(GestPymeSOCBusinessConstants.APPLICATION_NAME_PROPERTY));
-    	System.setProperty(GestPymeSOCBusinessConstants.MAIN_DATASOURCE_PROPERTY, properties.getString(GestPymeSOCBusinessConstants.MAIN_DATASOURCE_PROPERTY));
+    	System.setProperty(SystemConstants.APP_VERSION_PROP, properties.getString(GestPymeSOCBusinessConstants.APP_VERSION_CONFPROPERTY));
+    	System.setProperty(SystemConstants.APP_NAME_PROP, properties.getString(GestPymeSOCBusinessConstants.APP_NAME_CONFPROPERTY));
+    	System.setProperty(SystemConstants.MAIN_DSOURCE_PROP, properties.getString(GestPymeSOCBusinessConstants.MAIN_DSOURCE_CONFPROPERTY));
     	
     	IOCHelper.setProvider(SpringIOCProvider.configure(WebApplicationContextUtils.getRequiredWebApplicationContext(sce.getServletContext())));
     	DBUtil.init(IOCHelper.getBean(GestPymeSOCBusinessUtils.getMainDataSourceName(), DataSource.class));

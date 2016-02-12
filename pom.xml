@@ -253,7 +253,7 @@
 		</dependency>
 		<dependency>
 			<groupId>co.com.binariasystems</groupId>
-			<artifactId>MasterCentralBusiness</artifactId>
+			<artifactId>MasterCentralSharedBusiness</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>

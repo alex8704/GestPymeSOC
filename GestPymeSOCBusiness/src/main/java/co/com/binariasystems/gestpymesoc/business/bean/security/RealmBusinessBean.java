@@ -1,4 +1,4 @@
-package co.com.binariasystems.gestpymesoc.business.bean;
+package co.com.binariasystems.gestpymesoc.business.bean.security;
 
 import java.util.List;
 

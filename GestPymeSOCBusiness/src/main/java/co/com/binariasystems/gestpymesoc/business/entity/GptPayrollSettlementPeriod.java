@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 import co.com.binariasystems.commonsmodel.enumerated.PayrollPeriodType;
 import co.com.binariasystems.commonsmodel.enumerated.SN2Boolean;
 import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
-import co.com.binariasystems.mastercentral.business.entity.MatCompany;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatCompany;
 
 /**
  *

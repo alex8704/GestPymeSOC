@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import co.com.binariasystems.fmw.security.FMWSecurityException;
 import co.com.binariasystems.fmw.vweb.uicomponet.treemenu.MenuElement;
-import co.com.binariasystems.gestpymesoc.business.bean.SecurityBean;
+import co.com.binariasystems.gestpymesoc.business.bean.security.RealmBusinessBean;
 import co.com.binariasystems.gestpymesoc.web.security.GPSAuditoryDataProvider;
 import co.com.binariasystems.orion.model.dto.AccessTokenDTO;
 import co.com.binariasystems.orion.model.dto.ModuleDTO;
@@ -19,7 +19,7 @@ import co.com.binariasystems.orion.model.dto.ResourceDTO;
 @Component
 public class GPSMenuGenerator {
 	@Autowired
-	private SecurityBean securityBean;
+	private RealmBusinessBean securityBean;
 	@Autowired
 	private GPSAuditoryDataProvider auditoryDataProvider;
 	

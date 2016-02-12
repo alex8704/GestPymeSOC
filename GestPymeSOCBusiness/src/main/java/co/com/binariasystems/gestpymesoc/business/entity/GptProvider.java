@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
-import co.com.binariasystems.mastercentral.business.entity.MatThirdPerson;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatThirdPerson;
 
 /**
  *

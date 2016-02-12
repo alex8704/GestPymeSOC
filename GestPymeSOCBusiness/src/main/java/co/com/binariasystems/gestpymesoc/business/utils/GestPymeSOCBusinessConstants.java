@@ -1,8 +1,8 @@
 package co.com.binariasystems.gestpymesoc.business.utils;
 
 public interface GestPymeSOCBusinessConstants {
-	final String APPLICATION_NAME_PROPERTY = "GestPymeSOC.applicationName";
-	final String APPLICATION_VERSION_PROPERTY = "GestPymeSOC.applicationVersion";
-	final String MAIN_DATASOURCE_PROPERTY = "entityManagerFactory.dataSourceName";
+	final String APP_NAME_CONFPROPERTY = "GestPymeSOC.applicationName";
+	final String APP_VERSION_CONFPROPERTY = "GestPymeSOC.applicationVersion";
+	final String MAIN_DSOURCE_CONFPROPERTY = "entityManagerFactory.dataSourceName";
 	final String GPS_DBSCHEMA = "GESTPYMESOC";
 }

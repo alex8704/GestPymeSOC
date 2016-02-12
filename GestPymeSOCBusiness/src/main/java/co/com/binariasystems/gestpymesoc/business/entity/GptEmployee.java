@@ -15,12 +15,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessConstants;
-import co.com.binariasystems.mastercentral.business.entity.MatCompany;
-import co.com.binariasystems.mastercentral.business.entity.MatHealthAdminCompany;
-import co.com.binariasystems.mastercentral.business.entity.MatMasterData;
-import co.com.binariasystems.mastercentral.business.entity.MatPensionFundAdminCompany;
-import co.com.binariasystems.mastercentral.business.entity.MatState;
-import co.com.binariasystems.mastercentral.business.entity.MatThirdPerson;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatCompany;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatHealthAdminCompany;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatMasterData;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatPensionFundAdminCompany;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatState;
+import co.com.binariasystems.mastercentral.shared.business.entity.MatThirdPerson;
 
 /**
  *

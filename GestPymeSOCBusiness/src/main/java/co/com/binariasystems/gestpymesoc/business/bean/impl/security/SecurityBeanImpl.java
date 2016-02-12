@@ -1,20 +1,19 @@
-package co.com.binariasystems.gestpymesoc.business.bean.impl;
+package co.com.binariasystems.gestpymesoc.business.bean.impl.security;
 
 import java.io.IOException;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import co.com.binariasystems.commonsmodel.constants.SystemConstants;
 import co.com.binariasystems.commonsmodel.enumerated.SN2Boolean;
 import co.com.binariasystems.fmw.security.FMWSecurityException;
 import co.com.binariasystems.fmw.util.exception.FMWExceptionUtils;
-import co.com.binariasystems.gestpymesoc.business.bean.ConfigParameterBean;
-import co.com.binariasystems.gestpymesoc.business.bean.SecurityBean;
+import co.com.binariasystems.gestpymesoc.business.bean.security.RealmBusinessBean;
+import co.com.binariasystems.mastercentral.shared.business.bean.ConfigParameterBean;
 import co.com.binariasystems.orion.model.dto.AccessTokenDTO;
 import co.com.binariasystems.orion.model.dto.AuthenticationDTO;
 import co.com.binariasystems.orion.model.dto.ResourceDTO;
@@ -22,24 +21,30 @@ import co.com.binariasystems.orion.model.dto.RoleDTO;
 import co.com.binariasystems.orion.model.dto.UserCredentialsDTO;
 import co.com.binariasystems.orion.model.dto.UserDTO;
 import co.com.binariasystems.orionclient.ClientBuilder;
+import co.com.binariasystems.orionclient.ClientCredentialsProvider;
 import co.com.binariasystems.orionclient.security.SecurityClient;
 
 @Service
-public class SecurityBeanImpl implements SecurityBean{
+public class SecurityBeanImpl implements RealmBusinessBean{
 	@Autowired
 	private ConfigParameterBean parameterBean;
-	private SecurityClient securityClient;
+	@Autowired
+	private ClientCredentialsProvider credentialsProvider;
 	private ClientBuilder clientBuilder;
+
+	private void initClientBuilder(){
+		clientBuilder = ClientBuilder.getInstance(parameterBean.findShared(SystemConstants.ORION_RESTAPI_URL_PARAM).getStringValue(), credentialsProvider);
+	}
 	
-	@PostConstruct
-	protected void init(){
-		clientBuilder = ClientBuilder.getInstance(parameterBean.findByConfigParameterCode("URL_CONEXION_ORION").getStringValue(), parameterBean);
-		securityClient = clientBuilder.createService(SecurityClient.class);
+	private SecurityClient getClient(){
+		if(clientBuilder == null)
+			initClientBuilder();
+		return clientBuilder.createService(SecurityClient.class);
 	}
 
 	@Override
 	public UserDTO findUserByLoginAlias(String loginAlias) throws FMWSecurityException {
-		Call<UserDTO> serviceCall = securityClient.findUserByLoginAlias(loginAlias);
+		Call<UserDTO> serviceCall = getClient().findUserByLoginAlias(loginAlias);
 		try{
 			Response<UserDTO> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();
@@ -50,7 +55,7 @@ public class SecurityBeanImpl implements SecurityBean{
 
 	@Override
 	public UserCredentialsDTO findUserCredentials(String loginAlias) throws FMWSecurityException {
-		Call<UserCredentialsDTO> serviceCall = securityClient.findUserCredentials(loginAlias);
+		Call<UserCredentialsDTO> serviceCall = getClient().findUserCredentials(loginAlias);
 		try{
 			Response<UserCredentialsDTO> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();
@@ -61,7 +66,7 @@ public class SecurityBeanImpl implements SecurityBean{
 
 	@Override
 	public AccessTokenDTO saveAuthentication(AuthenticationDTO authentication) throws FMWSecurityException {
-		Call<AccessTokenDTO> serviceCall = securityClient.saveAuthentication(authentication);
+		Call<AccessTokenDTO> serviceCall = getClient().saveAuthentication(authentication);
 		try{
 			Response<AccessTokenDTO> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();
@@ -72,7 +77,7 @@ public class SecurityBeanImpl implements SecurityBean{
 
 	@Override
 	public List<RoleDTO> findUserRoles(AccessTokenDTO accessToken) throws FMWSecurityException {
-		Call<List<RoleDTO>> serviceCall = securityClient.findUserRoles(accessToken);
+		Call<List<RoleDTO>> serviceCall = getClient().findUserRoles(accessToken);
 		try{
 			Response<List<RoleDTO>> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();
@@ -83,7 +88,7 @@ public class SecurityBeanImpl implements SecurityBean{
 
 	@Override
 	public List<ResourceDTO> findRoleResources(RoleDTO role) throws FMWSecurityException {
-		Call<List<ResourceDTO>> serviceCall = securityClient.findRoleResources(role);
+		Call<List<ResourceDTO>> serviceCall = getClient().findRoleResources(role);
 		try{
 			Response<List<ResourceDTO>> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();
@@ -94,7 +99,7 @@ public class SecurityBeanImpl implements SecurityBean{
 
 	@Override
 	public boolean validateAccessTokenValidity(AccessTokenDTO accessToken) throws FMWSecurityException {
-		Call<SN2Boolean> serviceCall = securityClient.validateAccessTokenValidity(accessToken);
+		Call<SN2Boolean> serviceCall = getClient().validateAccessTokenValidity(accessToken);
 		try{
 			Response<SN2Boolean> serviceResponse = serviceCall.execute();
 			return serviceResponse.body().booleanValue();
@@ -105,7 +110,7 @@ public class SecurityBeanImpl implements SecurityBean{
 
 	@Override
 	public void invalidateUserSession(AccessTokenDTO accessToken) throws FMWSecurityException {
-		Call<Void> serviceCall = securityClient.invalidateUserSession(accessToken);
+		Call<Void> serviceCall = getClient().invalidateUserSession(accessToken);
 		try{
 			serviceCall.execute().body();
 		}catch(IOException ex){
@@ -115,7 +120,7 @@ public class SecurityBeanImpl implements SecurityBean{
 
 	@Override
 	public List<ResourceDTO> findUserResources(AccessTokenDTO accessToken) throws FMWSecurityException {
-		Call<List<ResourceDTO>> serviceCall = securityClient.findUserResources(accessToken);
+		Call<List<ResourceDTO>> serviceCall = getClient().findUserResources(accessToken);
 		try{
 			Response<List<ResourceDTO>> serviceResponse = serviceCall.execute();
 			return serviceResponse.body();
