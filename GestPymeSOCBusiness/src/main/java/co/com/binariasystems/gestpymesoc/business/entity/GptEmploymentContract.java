@@ -76,7 +76,6 @@ public class GptEmploymentContract implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "COD_TIPO_TERMINO")
     private ContractTermType termType;
-    @Size(max = 1)
     @Enumerated(EnumType.STRING)
     @Column(name = "REPORTA_TIEMPO")
     private SN2Boolean mustReportWorkTime;
