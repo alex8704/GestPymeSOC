@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -80,12 +81,12 @@ public class GptPayrollSettlementPeriod implements Serializable {
     @NotNull
     @Column(name = "FEC_CREACION")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDaye;
+    private Date creationDate;
     @Column(name = "FEC_MODIFICACION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modificationDate;
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID_EMPRESA")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch=FetchType.EAGER)
     private MatCompany company;
 
     /**
@@ -201,17 +202,17 @@ public class GptPayrollSettlementPeriod implements Serializable {
     }
 
     /**
-     * @return the creationDaye
+     * @return the creationDate
      */
-    public Date getCreationDaye() {
-        return creationDaye;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
     /**
-     * @param creationDaye the creationDaye to set
+     * @param creationDate the creationDate to set
      */
-    public void setCreationDaye(Date creationDaye) {
-        this.creationDaye = creationDaye;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     /**

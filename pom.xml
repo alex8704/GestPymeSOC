@@ -73,6 +73,11 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-spring-boot-starter</artifactId>
+				<version>1.0.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -143,6 +148,22 @@
 					<artifactId>antlr</artifactId>
 					<groupId>antlr</groupId>
 				</exclusion>
+				<exclusion>
+					<artifactId>commons-digester</artifactId>
+					<groupId>commons-digester</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-chain</artifactId>
+					<groupId>commons-chain</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-validator</artifactId>
+					<groupId>commons-validator</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>sslext</artifactId>
+					<groupId>sslext</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -208,6 +229,11 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>co.com.binariasystems</groupId>

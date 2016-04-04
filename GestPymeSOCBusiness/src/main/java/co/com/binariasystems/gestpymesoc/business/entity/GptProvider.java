@@ -6,7 +6,6 @@
 
 package co.com.binariasystems.gestpymesoc.business.entity;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,7 +20,6 @@ import co.com.binariasystems.mastercentral.shared.business.entity.MatThirdPerson
  */
 @Entity
 @Table(schema= GestPymeSOCBusinessConstants.GPS_DBSCHEMA, name = "GPT_PROVEEDORES")
-@DiscriminatorValue("PROVEEDOR")
 @NamedQueries({
     @NamedQuery(name = "GptProvider.findAll", query = "SELECT g FROM GptProvider g")})
 public class GptProvider extends MatThirdPerson {

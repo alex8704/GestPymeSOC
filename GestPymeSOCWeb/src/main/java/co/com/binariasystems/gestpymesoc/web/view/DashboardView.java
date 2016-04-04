@@ -1,21 +1,29 @@
 package co.com.binariasystems.gestpymesoc.web.view;
 
 import static co.com.binariasystems.fmw.vweb.uicomponet.builders.Builders.button;
+import static co.com.binariasystems.fmw.vweb.uicomponet.builders.Builders.comboBox;
 import static co.com.binariasystems.fmw.vweb.uicomponet.builders.Builders.label;
 import static co.com.binariasystems.fmw.vweb.uicomponet.builders.Builders.treeMenu;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.DashBoard;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.Init;
+import co.com.binariasystems.fmw.vweb.mvp.annotation.NoConventionString;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View.Root;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewBuild;
 import co.com.binariasystems.fmw.vweb.mvp.views.AbstractView;
 import co.com.binariasystems.fmw.vweb.uicomponet.TreeMenu;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.ButtonBuilder;
+import co.com.binariasystems.fmw.vweb.uicomponet.builders.ComboBoxBuilder;
 import co.com.binariasystems.fmw.vweb.uicomponet.builders.LabelBuilder;
+import co.com.binariasystems.fmw.vweb.util.VWebUtils;
 import co.com.binariasystems.gestpymesoc.business.utils.GestPymeSOCBusinessUtils;
 import co.com.binariasystems.gestpymesoc.web.controller.DashboardViewController;
 import co.com.binariasystems.gestpymesoc.web.utils.GPSWebConstants;
+import co.com.binariasystems.mastercentral.shared.business.dto.CompanyDTO;
 
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.shared.ui.MarginInfo;
@@ -23,6 +31,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.VerticalSplitPanel;
 import com.vaadin.ui.themes.ValoTheme;
@@ -44,6 +53,9 @@ public class DashboardView extends AbstractView implements GPSWebConstants {
 	private LabelBuilder loginAliasLbl;
 	private LabelBuilder netAddressLbl;
 	private LabelBuilder authenticationDateLbl;
+	private LabelBuilder companyLbl;
+	@NoConventionString
+	private ComboBoxBuilder companyCmb;
 	private TreeMenu treeMenu;
 	private ButtonBuilder logoutBtn;
 	
@@ -62,6 +74,8 @@ public class DashboardView extends AbstractView implements GPSWebConstants {
 		loginAliasLbl = label();
 		netAddressLbl = label();
 		authenticationDateLbl = label();
+		companyLbl = label();
+		companyCmb = comboBox();
 		logoutBtn = button(FontAwesome.SIGN_OUT);
 		
 		mainContainer.addComponent(logoAndTrademarkPanel);
@@ -82,6 +96,9 @@ public class DashboardView extends AbstractView implements GPSWebConstants {
 		accountInfoPanel.addComponent(netAddressLbl);
 		accountInfoPanel.addComponent(label("|"));
 		accountInfoPanel.addComponent(authenticationDateLbl);
+		accountInfoPanel.addComponent(label("|"));
+		accountInfoPanel.addComponent(companyLbl);
+		accountInfoPanel.addComponent(companyCmb);
 		
 		return mainContainer;
 	}
@@ -100,21 +117,37 @@ public class DashboardView extends AbstractView implements GPSWebConstants {
 		
 		accountInfoPanel.setSpacing(true);
 		accountInfoPanel.setMargin(new MarginInfo(false, true, false, true));
+		//accountInfoPanel.setWidth(100, Unit.PERCENTAGE);
 		
 		topPanel.setWidth(100, Unit.PERCENTAGE);
-		//topPanel.setExpandRatio(logoutBtn, 1.0f);
+		topPanel.setExpandRatio(accountInfoPanel, 1.0f);
 		topPanel.setComponentAlignment(logoutBtn, Alignment.TOP_RIGHT);
 		
 		currentUserNameLbl.boldStyle();
 		loginAliasLbl.boldStyle();
 		logoutBtn.withStyleNames(ValoTheme.BUTTON_LINK);
 		
+		companyCmb.setContainerDataSource(new BeanItemContainer<CompanyDTO>(CompanyDTO.class));
+		companyCmb.setItemCaptionPropertyId("businessName");
+		companyCmb.setItemCaption(null, VWebUtils.getComboBoxNoSelectionShortDescription());
+		companyCmb.addStyleName(ValoTheme.COMBOBOX_SMALL);
+		companyCmb.setWidth(200, Unit.PIXELS);
+		companyCmb.readOnly();
+		
 		treeMenu.setTitle(GestPymeSOCBusinessUtils.getApplicationName());
+		
+		companyCmb.addValueChangeListener(new DashboardViewEventListener());
 	}
-	
-	
 	
 	public void setCurrentView(Component component){
 		centralSplitPanel.setSecondComponent(component);
+	}
+	
+	private class DashboardViewEventListener implements ValueChangeListener{
+		@Override public void valueChange(ValueChangeEvent event) {
+			if(companyCmb.equals(event.getProperty()))
+			UI.getCurrent().getSession().setAttribute(CompanyDTO.class, (CompanyDTO)event.getProperty().getValue());
+		}
+		
 	}
 }
