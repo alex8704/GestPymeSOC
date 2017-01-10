@@ -72,10 +72,9 @@ public class GptEmploymentContract implements Serializable {
     @Column(name = "FEC_TERMINACION")
     @Temporal(TemporalType.DATE)
     private Date terminationDate;
-    @Basic(optional = false)
-    @Enumerated(EnumType.STRING)
-    @Column(name = "COD_TIPO_TERMINO")
-    private ContractTermType termType;
+    @JoinColumn(name = "ID_TIPO_CONTRATO", referencedColumnName = "ID_TIPO_CONTRATO")
+    @ManyToOne(optional = false)
+    private GptContractType contractType;
     @Enumerated(EnumType.STRING)
     @Column(name = "REPORTA_TIEMPO")
     private SN2Boolean mustReportWorkTime;
@@ -207,20 +206,6 @@ public class GptEmploymentContract implements Serializable {
     }
 
     /**
-     * @return the termType
-     */
-    public ContractTermType getTermType() {
-        return termType;
-    }
-
-    /**
-     * @param termType the termType to set
-     */
-    public void setTermType(ContractTermType termType) {
-        this.termType = termType;
-    }
-
-    /**
      * @return the mustReportWorkTime
      */
     public SN2Boolean getMustReportWorkTime() {
@@ -345,5 +330,21 @@ public class GptEmploymentContract implements Serializable {
     public void setAppointment(GptAppointment appointment) {
         this.appointment = appointment;
     }
+
+	/**
+	 * @return the contractType
+	 */
+	public GptContractType getContractType() {
+		return contractType;
+	}
+
+	/**
+	 * @param contractType the contractType to set
+	 */
+	public void setContractType(GptContractType contractType) {
+		this.contractType = contractType;
+	}
+    
+    
 
 }
