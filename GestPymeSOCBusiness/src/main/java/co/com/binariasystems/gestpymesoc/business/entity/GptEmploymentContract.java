@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -95,16 +96,16 @@ public class GptEmploymentContract implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modificationDate;
     @JoinColumn(name = "ID_EMPLEADO", referencedColumnName = "ID_TERCERO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch=FetchType.EAGER)
     private GptEmployee employee;
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID_EMPRESA")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch=FetchType.EAGER)
     private MatCompany company;
     @JoinColumn(name = "ID_MOTIVO_TERMINACION", referencedColumnName = "ID_MOTIVO_TERMINACION")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private GptContractTerminationReason terminationReason;
     @JoinColumn(name = "ID_CARGO", referencedColumnName = "ID_CARGO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch=FetchType.EAGER)
     private GptAppointment appointment;
 
     /**

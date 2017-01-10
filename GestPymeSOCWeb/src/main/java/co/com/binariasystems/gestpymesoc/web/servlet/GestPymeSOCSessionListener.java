@@ -30,6 +30,7 @@ public class GestPymeSOCSessionListener implements SessionInitListener, SessionD
 
 	@Override
 	public void sessionInit(SessionInitEvent event) throws ServiceException {
+		//event.getSession().setErrorHandler(new UIErrorHandler());
 		Cookie langCookie = null;
 		if (event.getRequest() != null) {
 			for (Cookie cookie : event.getRequest().getCookies())

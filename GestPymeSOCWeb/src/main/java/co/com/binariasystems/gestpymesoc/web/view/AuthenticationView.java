@@ -6,6 +6,7 @@ import co.com.binariasystems.fmw.vweb.mvp.annotation.NoConventionString;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.View.Root;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.ViewBuild;
+import co.com.binariasystems.fmw.vweb.mvp.annotation.validation.NullValidator;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.validation.RegExpValidator;
 import co.com.binariasystems.fmw.vweb.mvp.annotation.validation.StringLengthValidator;
 import co.com.binariasystems.fmw.vweb.mvp.views.AbstractView;
@@ -29,7 +30,6 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.VerticalLayout;
 
-
 @AuthenticationForm
 @Root
 @View(url="/", messages=AuthenticationView.MESSAGES_BUNDLE, controller=AuthenticationViewController.class, viewStringsByConventions= true)
@@ -41,9 +41,11 @@ public class AuthenticationView extends AbstractView implements UIConstants, GPS
 	private Image						applicationLogo;
 	private LabelBuilder				welcomeLbl;
 	@PropertyId("username")
+	@NullValidator
 	@StringLengthValidator(min=6, max=30)
 	private TextFieldBuilder			usernameTxt;
 	@PropertyId("password")
+	@NullValidator
 	@RegExpValidator(expression="[a-zA-Z_0-9]{6,30}")
 	private PasswordFieldBuilder		passwordTxt;
 	@PropertyId("rememberMe")

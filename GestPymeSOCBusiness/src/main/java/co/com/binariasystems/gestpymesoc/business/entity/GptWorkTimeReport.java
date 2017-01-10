@@ -15,6 +15,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -77,10 +78,10 @@ public class GptWorkTimeReport implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modificationDate;
     @JoinColumn(name = "ID_EMPLEADO", referencedColumnName = "ID_TERCERO", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch=FetchType.EAGER)
     private GptEmployee employee;
     @JoinColumn(name = "ID_PERIODO_NOMINA", referencedColumnName = "ID_PERIODO_NOMINA", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch=FetchType.EAGER)
     private GptPayrollSettlementPeriod payrollSettlementPeriod;
 
     /**

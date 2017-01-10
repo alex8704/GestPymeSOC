@@ -35,34 +35,42 @@ import com.vaadin.ui.CheckBox;
 public class AuthenticationViewController extends AbstractViewController{
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationViewController.class);
 	
-	@ViewField private TextFieldBuilder					usernameTxt;
-	@ViewField private PasswordFieldBuilder				passwordTxt;
-	@ViewField private CheckBox							rememberMeChk;
-	@ViewField private ButtonBuilder					authenticateBtn;
-	@ViewField private BeanFieldGroup<AuthenticationDTO> fieldGroup;
-	@ViewField private AuthenticationDTO				authenticationDTO;
-	@ViewField private FormPanel						loginForm;
+	@ViewField
+	private TextFieldBuilder usernameTxt;
+	@ViewField
+	private PasswordFieldBuilder passwordTxt;
+	@ViewField
+	private CheckBox rememberMeChk;
+	@ViewField
+	private ButtonBuilder authenticateBtn;
+	@ViewField
+	private BeanFieldGroup<AuthenticationDTO> fieldGroup;
+	@ViewField
+	private AuthenticationDTO authenticationDTO;
+	@ViewField
+	private FormPanel loginForm;
 	@Autowired
-	private SecurityManager								securityManager;
-	private AuthentiationViewClickListener 				clickListener;
-	
+	private SecurityManager securityManager;
+	private AuthentiationViewClickListener clickListener;
+
 	@Init
-	public void init(){
+	public void init() {
 		clickListener = new AuthentiationViewClickListener();
 		authenticateBtn.addClickListener(clickListener);
 	}
-	
+
 	@OnLoad
-	public void onLoadController(){
+	public void onLoadController() {
+		loginForm.initFocus();
 	}
-	
+
 	@OnUnLoad
-	public void onUnloadController(){
-		for(Object propertyId : fieldGroup.getBoundPropertyIds())
+	public void onUnloadController() {
+		for (Object propertyId : fieldGroup.getBoundPropertyIds())
 			fieldGroup.getItemDataSource().getItemProperty(propertyId).setValue(null);
 	}
-	
-	private VaadinServletRequest getVaadinRequest(){
+
+	private VaadinServletRequest getVaadinRequest() {
 		return (VaadinServletRequest) VaadinService.getCurrentRequest();
 	}
 
@@ -78,17 +86,16 @@ public class AuthenticationViewController extends AbstractViewController{
 		securityManager.authenticate(authRequest);
 		MVPUtils.navigateTo(securityManager.getDashBoardViewUrl());
 	}
-	
-	
-	
-	private class AuthentiationViewClickListener implements ClickListener{
-		@Override public void buttonClick(ClickEvent event) {
+
+	private class AuthentiationViewClickListener implements ClickListener {
+		@Override
+		public void buttonClick(ClickEvent event) {
 			try {
 				loginButtonClick();
 			} catch (FormValidationException | FMWSecurityException ex) {
 				MessageDialog.showExceptions(ex, LOGGER);
 			}
 		}
-		
+
 	}
 }
