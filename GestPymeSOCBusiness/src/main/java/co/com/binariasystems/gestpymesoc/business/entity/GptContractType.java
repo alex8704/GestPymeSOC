@@ -66,6 +66,9 @@ public class GptContractType implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "ES_DURACION_FIJA")
     private SN2Boolean isFixedDuration;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ES_PARA_INDEPENDIENTES")
+    private SN2Boolean isForIndependents;//Campo importante para descartar de liquidaciones de nomina este tipo de contratos
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -275,6 +278,12 @@ public class GptContractType implements Serializable {
 	 */
 	public void setModificationDate(Date modificationDate) {
 		this.modificationDate = modificationDate;
+	}
+	public SN2Boolean getIsForIndependents() {
+		return isForIndependents;
+	}
+	public void setIsForIndependents(SN2Boolean isForIndependents) {
+		this.isForIndependents = isForIndependents;
 	}
     
     
